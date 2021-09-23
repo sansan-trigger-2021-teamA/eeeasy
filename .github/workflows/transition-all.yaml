@@ -2,7 +2,7 @@ on:
   push:
     branches:
     - '*'
-    - '!master'
+    - '!main'
 
 name: Transition Issue for progress
 
