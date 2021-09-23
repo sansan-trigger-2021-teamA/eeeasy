@@ -14,7 +14,7 @@ jobs:
     if: github.event.action == 'opened'
     steps:
     - name: Login
-      uses: atlassian/gajira-login@master
+      uses: atlassian/gajira-login@main
       env:
         JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
         JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
@@ -24,7 +24,7 @@ jobs:
       uses: atlassian/gajira-create@v2.0.1
       with:
         # 付けたいチケット名を選択(jiraのAPItokenのlabelに合わせる)
-        project: {プロジェクト名}
+        project: eeeasy
         # 課題タイプを指定
         issuetype: Task
         # issuesのタイトルが要約になるように設定
