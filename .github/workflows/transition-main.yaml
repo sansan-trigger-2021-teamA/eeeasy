@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Login
-      uses: atlassian/gajira-login@main
+      uses: atlassian/gajira-login@master
       env:
         JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
         JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
@@ -21,13 +21,13 @@ jobs:
     # プッシュされたコミットに記載された課題キーを抽出する
     - name: Find in commit messages
       id: find
-      uses: atlassian/gajira-find-issue-key@main
+      uses: atlassian/gajira-find-issue-key@master
       with:
         string: ${{ github.event.ref }}
 
     # 課題キーが特定できればJiraに対してトランジションを発行　
     - name: Transition issue
-      uses: atlassian/gajira-transition@main
+      uses: atlassian/gajira-transition@master
       # 課題キーが含まれていなければスルー
       if: ${{ steps.find.outputs.issue }}
       with:
