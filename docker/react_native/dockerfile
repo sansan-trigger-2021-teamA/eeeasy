@@ -8,6 +8,4 @@ EXPOSE 19002
 
 RUN apk update && apk add zsh
 
-RUN npm install -g @aws-amplify/cli
-
 RUN yarn global add expo-cli
