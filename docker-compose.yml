@@ -1,7 +1,10 @@
 version: "3"
 services:
   react_native:
-    build: ./docker/react_native
+    container_name: react_native
+    build:
+      context: .
+      dockerfile: ./docker/react_native/dockerfile
     volumes:
       - ./react_native/:/usr/src/app
     env_file: .env
@@ -10,3 +13,22 @@ services:
       - "19000:19000"
       - "19001:19001"
       - "19002:19002"
+
+  chalice:
+    container_name: chalice
+    build:
+      context: .
+      dockerfile: ./docker/chalice/dockerfile
+    volumes:
+      - ./chalice/:/app
+    env_file: .env
+    command: chalice local --host=0.0.0.0 --port=8000
+    tty: true
+    stdin_open: true
+    working_dir: "${APP_PATH}"
+    ports:
+      - "80:8000"
+    environment:
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
