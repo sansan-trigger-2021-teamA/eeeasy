@@ -23,7 +23,7 @@ export default function Main({ navigation }: RootTabScreenProps<'Main'>) {
           <Text>ここはグラフ</Text>
         </View>
       </ScrollView>
-      <View　style={{ flexDirection: 'row'}}>
+      <View　style={{ flexDirection: 'row',marginBottom:20,}}>
         <Button 
           title="Press me"
           onPress={() => alert('Simple Button pressed')}
