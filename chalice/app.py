@@ -1,6 +1,7 @@
-import chalice
+from chalice import Chalice
 
-@app.route('/hello/{name}')
-def hello_name(name):
-   # '/hello/james' -> {"hello": "james"}
-   return {'hello': name}
+app = Chalice(app_name="helloworld")
+
+@app.route("/")
+def index():
+    return {"hello": "world"}

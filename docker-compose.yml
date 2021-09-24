@@ -4,7 +4,7 @@ services:
     container_name: react_native
     build:
       context: .
-      dockerfile: ./docker/react_native/Dockerfile
+      dockerfile: ./docker/react_native/dockerfile
     volumes:
       - ./react_native/:/usr/src/app
     env_file: .env
@@ -14,11 +14,11 @@ services:
       - "19001:19001"
       - "19002:19002"
 
-  chailce:
+  chalice:
     container_name: chalice
     build:
       context: .
-      dockerfile: ./docker/chalice/Dockerfile
+      dockerfile: ./docker/chalice/dockerfile
     volumes:
       - ./chalice/:/app
     env_file: .env
