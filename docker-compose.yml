@@ -5,7 +5,7 @@ services:
     volumes:
       - ./react_native/:/usr/src/app
     env_file: .env
-    command: yarn start
+    command: expo start
     ports:
       - "19000:19000"
       - "19001:19001"

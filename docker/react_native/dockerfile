@@ -2,6 +2,10 @@ FROM node:14-alpine
 
 WORKDIR /usr/src/app/
 
+EXPOSE 19000
+EXPOSE 19001
+EXPOSE 19002
+
 RUN apk update && apk add zsh
 
 RUN yarn global add expo-cli
