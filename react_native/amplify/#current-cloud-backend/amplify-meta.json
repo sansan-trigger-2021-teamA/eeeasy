@@ -1,0 +1,57 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-eeeasy-dev-194421-authRole",
+      "UnauthRoleArn": "arn:aws:iam::955626639300:role/amplify-eeeasy-dev-194421-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::955626639300:role/amplify-eeeasy-dev-194421-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-eeeasy-dev-194421-deployment",
+      "UnauthRoleName": "amplify-eeeasy-dev-194421-unauthRole",
+      "StackName": "amplify-eeeasy-dev-194421",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:955626639300:stack/amplify-eeeasy-dev-194421/8ceeaef0-1ded-11ec-b06a-0689d40efb27",
+      "AmplifyAppId": "d3a4nozwcc993x"
+    }
+  },
+  "auth": {
+    "eeeasy7fa50027": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "loginMechanisms": [],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-eeeasy-dev-194421-deployment/amplify-cfn-templates/auth/eeeasy7fa50027-cloudformation-template.yml",
+        "logicalId": "autheeeasy7fa50027"
+      },
+      "lastPushTimeStamp": "2021-09-25T11:06:48.354Z",
+      "output": {
+        "UserPoolId": "ap-northeast-1_jqbq1RQXp",
+        "AppClientIDWeb": "5nrqugbapm7tmd9hbtdje757jm",
+        "AppClientID": "7ehgf4htdi8p1342enfhmcv2p",
+        "HostedUIDomain": "eeeasy-dev",
+        "IdentityPoolId": "ap-northeast-1:49cc692c-3746-45cb-874a-bf2b84307c8c",
+        "UserPoolArn": "arn:aws:cognito-idp:ap-northeast-1:955626639300:userpool/ap-northeast-1_jqbq1RQXp",
+        "IdentityPoolName": "eeeasy7fa50027_identitypool_7fa50027__dev",
+        "OAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"exp://127.0.0.1:19000/--/\"],\"LogoutURLs\":[\"exp://127.0.0.1:19000/--/\"]}",
+        "UserPoolName": "eeeasy7fa50027_userpool_7fa50027"
+      },
+      "lastPushDirHash": "qElUQJbl2e0MhtVyhihgPOB83GI="
+    }
+  }
+}
