@@ -7,9 +7,13 @@ import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 
 import Amplify from '@aws-amplify/core';
-import config from './src/aws-exports';
+import awsmobile from './src/aws-exports';
 import {withAuthenticator} from 'aws-amplify-react-native';
-Amplify.configure(config);
+Amplify.configure({
+  ...awsmobile,
+  Analytics: {
+  disabled: true,
+},});
 
 function App() {
   const isLoadingComplete = useCachedResources();

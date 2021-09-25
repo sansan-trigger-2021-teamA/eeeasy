@@ -1,6 +1,6 @@
 {
   "auth": {
-    "eeeasy77c1ed1c": {
+    "eeeasy7fa50027": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
