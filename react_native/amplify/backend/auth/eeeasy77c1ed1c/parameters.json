@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "eeeasy0df37865_identitypool_0df37865",
+    "identityPoolName": "eeeasy77c1ed1c_identitypool_77c1ed1c",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "eeeasy0df37865",
-    "userPoolName": "eeeasy0df37865_userpool_0df37865",
+    "resourceNameTruncated": "eeeasy77c1ed1c",
+    "userPoolName": "eeeasy77c1ed1c_userpool_77c1ed1c",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -29,10 +29,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "eeeasy0df37865_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "eeeasy77c1ed1c_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "0df37865",
-    "resourceName": "eeeasy0df37865",
+    "sharedId": "77c1ed1c",
+    "resourceName": "eeeasy77c1ed1c",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -46,10 +46,15 @@
             "Arn"
         ]
     },
-    "useDefault": "default",
+    "useDefault": "defaultSocial",
+    "hostedUI": true,
     "usernameAttributes": [
         "email"
     ],
+    "hostedUIDomainName": "eeeasy",
+    "authProvidersUserPool": [],
+    "hostedUIProviderMeta": "[]",
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"exp://127.0.0.1:19000/--/\"],\"LogoutURLs\":[\"exp://127.0.0.1:19000/--/\"]}",
     "userPoolGroupList": [],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,
