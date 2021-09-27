@@ -20,7 +20,7 @@ const linking: LinkingOptions<RootStackParamList> = {
               TabOneScreen: 'main',
             },
           },
-          TabTwo: {
+          SendInfo: {
             screens: {
               TabTwoScreen: 'two',
             },
