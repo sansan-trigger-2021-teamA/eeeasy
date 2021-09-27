@@ -1,3 +1,5 @@
 .env
 .node-version
-eeeasy/
+/eeeasy/
+chalice/eeeasy/.chalice/config.json
+chalice/.chalice/config.json
