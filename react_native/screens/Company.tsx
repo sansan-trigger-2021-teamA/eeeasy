@@ -10,7 +10,7 @@ const Company = (listRenderItemInfo: ListRenderItemInfo<Props>) => {
 
     const style = StyleSheet.create({
         item: {
-            padding: 20,
+            height: 100,
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'center',
@@ -20,19 +20,25 @@ const Company = (listRenderItemInfo: ListRenderItemInfo<Props>) => {
         marginRight:"10%"
         },
         separator: {
-        marginVertical:5,
+        //marginVertical:5,
         height: 1,
-        width: '80%',
+        width: '100%',
         },
     })
 
     return (
         <>
-        
         <View　style={style.item}>
-            <Text style={style.name}>{listRenderItemInfo.item.name}</Text>
+            <View　style={{flexDirection: 'column'}}>
+                <Text style={style.name}>{listRenderItemInfo.item.name}</Text>
+                <Text　style={{paddingTop:10,fontSize:13}}>取ろうとしてる情報</Text>
+            </View>
             <Button 
             title="承認"
+            onPress={() => alert('Simple Button pressed')}
+            />
+            <Button 
+            title="拒否"
             onPress={() => alert('Simple Button pressed')}
             />
         </View>
