@@ -1,16 +1,39 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
-
+import { StyleSheet,SafeAreaView,ScrollView,FlatList } from 'react-native';
+import Company from './Company'
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
+import Constants from 'expo-constants';
 
 export default function WaitingCompany() {
+    type dummy = {
+        id?:number
+        name:string
+    }
+    const dummyCompany:dummy[] = [
+        {
+            id:1,
+            name:"sansan"
+        },
+        {
+            id:2,
+            name:"yahoo"
+        },
+        {
+            id:3,
+            name:"google"
+        }
+    ]
+
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabTwoScreen.tsx" />
-    </View>
+    <SafeAreaView style={styles.container}>
+        <FlatList 
+            data={dummyCompany} 
+            renderItem={Company}
+            style={{height:'10%',width:"100rem"}}
+            />
+    </SafeAreaView>
   );
 }
 
@@ -19,6 +42,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: Constants.statusBarHeight,
   },
   title: {
     fontSize: 20,
