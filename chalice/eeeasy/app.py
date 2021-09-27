@@ -1,15 +1,35 @@
 from chalice import Chalice
 import boto3
 import json
+import base64
+from botocore.exceptions import ClientError
+import os
+import pymysql
 
 BUCKET_NAME = 'eeeasy-s3'
 s3 = boto3.client('s3')
 app = Chalice(app_name='eeeasy')
 app.debug = True
-
+ 
+#rds settings
+DB_USER = os.environ["USER"]
+DB_PASSWORD = os.environ["PASSWORD"]
+DB_HOST = os.environ["PROXY_END_POINT"]
+DB_NAME = os.environ["DB_NAME"]
+ 
 @app.route('/')
 def index():
-    return {'hello': 'world'}
+    test = "error"
+    try:
+        conn = pymysql.connect(host=DB_HOST, user=DB_USER, passwd=DB_PASSWORD, db=DB_NAME, connect_timeout=5)
+        test = "success"
+        return {'hello': test}
+
+    except Exception  as e:
+        print("Fail connecting to RDS mysql instance")
+        print(e)
+        return {'hello': test}
+
 
 @app.route('/save', methods=['POST'], content_types=['application/json'],cors=True)
 def save():
@@ -21,23 +41,3 @@ def save():
                   Body=json.dumps(data))
     return {'save': data['key']}
 
-
-# The view function above will return {"hello": "world"}
-# whenever you make an HTTP GET request to '/'.
-#
-# Here are a few more examples:
-#
-# @app.route('/hello/{name}')
-# def hello_name(name):
-#    # '/hello/james' -> {"hello": "james"}
-#    return {'hello': name}
-#
-# @app.route('/users', methods=['POST'])
-# def create_user():
-#     # This is the JSON body the user sent in their POST request.
-#     user_as_json = app.current_request.json_body
-#     # We'll echo the json body back to the user in a 'user' key.
-#     return {'user': user_as_json}
-#
-# See the README documentation for more examples.
-#

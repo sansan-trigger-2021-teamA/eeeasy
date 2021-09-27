@@ -3,7 +3,13 @@
   "app_name": "eeeasy",
   "stages": {
     "dev": {
-      "api_gateway_stage": "api"
+      "api_gateway_stage": "api",
+      "environment_variables": {
+        "USER": "admin",
+        "PASSWORD": "trigger_01",
+        "DB_NAME": "eeeasy_app",
+        "PROXY_END_POINT":"rds-proxy.proxy-cgfzn7ontkcn.ap-northeast-1.rds.amazonaws.com"
+      }
     }
   }
 }
