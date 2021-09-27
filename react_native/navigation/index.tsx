@@ -15,7 +15,7 @@ import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import Main from '../screens/Main';
-import TabTwoScreen from '../screens/TabTwoScreen';
+import HealthInfo from '../screens/HealthInfo';
 import WaitingCompany from '../screens/WaitingCompany';
 import Coupon from '../screens/Coupon';
 import Profile from '../screens/Profile';
@@ -88,10 +88,10 @@ function BottomTabNavigator() {
         })}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
+        name="HealthInfo"
+        component={HealthInfo}
         options={{
-          title: 'Tab Two',
+          title: '健康情報',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />
