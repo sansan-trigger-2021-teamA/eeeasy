@@ -14,8 +14,11 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
-import TabOneScreen from '../screens/TabOneScreen';
+import Main from '../screens/Main';
 import TabTwoScreen from '../screens/TabTwoScreen';
+import WaitingCompany from '../screens/WaitingCompany';
+import Coupon from '../screens/Coupon';
+import Profile from '../screens/Profile';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
@@ -58,15 +61,15 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="Main"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}>
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-          title: 'Tab One',
+        name="Main"
+        component={Main}
+        options={({ navigation }: RootTabScreenProps<'Main'>) => ({
+          title: 'トップページ',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
           headerRight: () => (
             <Pressable
@@ -91,6 +94,30 @@ function BottomTabNavigator() {
           title: 'Tab Two',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
+      />
+      <BottomTab.Screen
+      name="WaitingCompany"
+      component={WaitingCompany}
+      options={{
+        title: '企業一覧',
+        tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+      }}
+      />
+      <BottomTab.Screen
+      name="Coupon"
+      component={Coupon}
+      options={{
+        title: 'クーポン',
+        tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+      }}
+      />
+      <BottomTab.Screen
+      name="Profile"
+      component={Profile}
+      options={{
+        title: 'プロフィール',
+        tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+      }}
       />
     </BottomTab.Navigator>
   );

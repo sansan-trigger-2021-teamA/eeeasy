@@ -1,11 +1,25 @@
 from chalice import Chalice
+import boto3
+import json
 
-app = Chalice(app_name='chalice')
-
+BUCKET_NAME = 'eeeasy-s3'
+s3 = boto3.client('s3')
+app = Chalice(app_name='eeeasy')
+app.debug = True
 
 @app.route('/')
 def index():
     return {'hello': 'world'}
+
+@app.route('/save', methods=['POST'], content_types=['application/json'],cors=True)
+def save():
+    data = app.current_request.json_body
+    if 'key' not in data:
+        return {'error': 'please input key'}
+    key = str(data['key'])+'.json'
+    s3.put_object(Bucket=BUCKET_NAME, Key=key,
+                  Body=json.dumps(data))
+    return {'save': data['key']}
 
 
 # The view function above will return {"hello": "world"}
