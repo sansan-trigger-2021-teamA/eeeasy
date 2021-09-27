@@ -7,20 +7,20 @@ import Constants from 'expo-constants';
 
 export default function WaitingCompany() {
     type dummy = {
-        id?:number
+        id?:string
         name:string
     }
     const dummyCompany:dummy[] = [
         {
-            id:1,
+            id:"1",
             name:"sansan"
         },
         {
-            id:2,
+            id:"2",
             name:"yahoo"
         },
         {
-            id:3,
+            id:"3",
             name:"google"
         }
     ]
@@ -31,7 +31,7 @@ export default function WaitingCompany() {
         <FlatList 
             data={dummyCompany} 
             renderItem={Company}
-            style={{height:'10%',width:"100rem"}}
+            style={{height:'10%',width:"200%"}}
             />
     </SafeAreaView>
   );
@@ -40,9 +40,10 @@ export default function WaitingCompany() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor:"white",
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: Constants.statusBarHeight,
+    //marginTop: Constants.statusBarHeight,
   },
   title: {
     fontSize: 20,
