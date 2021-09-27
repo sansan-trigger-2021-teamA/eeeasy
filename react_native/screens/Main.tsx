@@ -20,7 +20,7 @@ export default function Main({ navigation }: RootTabScreenProps<'Main'>) {
           <Text>ここに通知が来るンゴ</Text>
         </View>
         <View style={styles.notify} lightColor="#eee" darkColor="rgba(255,255,255,0.1)">
-          <Text>ここはグラフ</Text>
+          <Text>テスト</Text>
         </View>
       </ScrollView>
       <View　style={{ flexDirection: 'row',marginBottom:20,}}>

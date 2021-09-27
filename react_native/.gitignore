@@ -8,8 +8,7 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
+./amplify/.config
 
 # macOS
 .DS_Store
-
-react_native/amplify/.config/*
