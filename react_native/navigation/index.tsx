@@ -91,7 +91,7 @@ function BottomTabNavigator() {
         name="HealthInfo"
         component={HealthInfo}
         options={{
-          title: '健康情報',
+          title: 'データの送信',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />
