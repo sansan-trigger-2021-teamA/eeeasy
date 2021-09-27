@@ -46,12 +46,12 @@ export default function Coupons() {
           keyExtractor={(item, index) => index.toString()}
           numColumns={2}
           renderItem={({ item }) => (
-            <View style={styles.coupon}>
+            <View key={item.id} style={styles.coupon}>
               <ImageBackground
                 source={{ uri: "https://source.unsplash.com/random" }}
                 style={styles.imageStyle}
               >
-                <Text key={item.id} style={styles.getStartedText}>
+                <Text style={styles.getStartedText}>
                   {item.companyName}
                 </Text>
                 <Text style={styles.getStartedText}>{item.couponName}</Text>
