@@ -8,7 +8,9 @@
         "USER": "admin",
         "PASSWORD": "trigger_01",
         "DB_NAME": "eeeasy_app",
-        "PROXY_END_POINT":"rds-proxy.proxy-cgfzn7ontkcn.ap-northeast-1.rds.amazonaws.com"
+        "PROXY_END_POINT":"rdsproxy.proxy-cgfzn7ontkcn.ap-northeast-1.rds.amazonaws.com",
+        "WRITER_DB_END_POINT":"eeeasy-aurora.cluster-cgfzn7ontkcn.ap-northeast-1.rds.amazonaws.com",
+        "S3_BUCKET_NAME":"eeeasy-s3"
       }
     }
   }
