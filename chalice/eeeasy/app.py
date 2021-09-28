@@ -30,7 +30,6 @@ def index():
         print(e)
         return {"error":"error"}
 
-
 @app.route('/save', methods=['POST'], content_types=['application/json'],cors=True)
 def save():
     data = app.current_request.json_body
@@ -39,7 +38,6 @@ def save():
     responce = s3.create_bucket(data)
     return responce
     
-
 @app.route('/create-table', methods=['POST'], content_types=['application/json'],cors=True)
 def create_table():
     query = "CREATE Table Users ( UserId int NOT NULL AUTO_INCREMENT, Name VARCHAR(255) NOT NULL, Gender VARCHAR(20) NOT NULL, Age TINYINT NOT NULL, Job VARCHAR(20) NOT NULL, PRIMARY KEY (UserId))"
@@ -47,7 +45,8 @@ def create_table():
     return {"status":responce}
 
 @app.route('/create-user', methods=['POST'], content_types=['application/json'],cors=True)
-def create_profile():
+def create_user():
     data = app.current_request.json_body
-    responce = aurora.create_profile(data)
+    responce = aurora.create_user(data)
     return {"status":responce}
+

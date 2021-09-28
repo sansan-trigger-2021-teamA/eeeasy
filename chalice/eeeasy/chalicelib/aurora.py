@@ -21,7 +21,6 @@ def connect_RDS():
         logger.warn(e)
         return e
     
-
 def create_table(query):
     conn = connect_RDS()
     ret = ""
@@ -34,24 +33,23 @@ def create_table(query):
     conn.close()
     return ret
 
-def create_profile(profile):
+def create_user(profile):
     """
     '{"name":"test1","gender":"女","age":"22","job":"会社員"}'
     """
     name = profile["name"]
     gender = profile["gender"]
-    age = profile["age"]
+    age = int(profile["age"])
     job = profile["job"]	
-    query = f"INSERT INTO Users (Name, Gender, Age, Job) VALUES({name}, {gender}, {age}, {job})"
+    query = f"INSERT INTO Users(Name, Gender, Age, Job) VALUES({name}, {gender}, {age}, {job})"
     conn = connect_RDS()
     ret = ""
     if conn == type(str):
       return "error"
-    with conn.cursor() as cur:
-          cur.execute(query)
-          conn.commit()
-          ret = "success"
-
+    # with conn.cursor() as cur:
+    #     cur.execute(query)
+    #     conn.commit()
+    #     ret = "success"
     conn.close()
     return ret
 
@@ -61,5 +59,3 @@ def edit_profile(profile):
     query = f"UPDATE Users SET Job={job} WHERE Name={name}"
     conn = connect_RDS()
     conn.close()
-
-
