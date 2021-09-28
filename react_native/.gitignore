@@ -9,6 +9,7 @@ npm-debug.*
 *.orig.*
 web-build/
 ./amplify/.config
+/yarn.lock
 
 yarn.lock
 # macOS

@@ -35,11 +35,6 @@
           "EMAIL"
         ]
       },
-      "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-eeeasy-dev-194421-deployment/amplify-cfn-templates/auth/eeeasy7fa50027-cloudformation-template.yml",
-        "logicalId": "autheeeasy7fa50027"
-      },
-      "lastPushTimeStamp": "2021-09-25T11:06:48.354Z",
       "output": {
         "UserPoolId": "ap-northeast-1_jqbq1RQXp",
         "AppClientIDWeb": "5nrqugbapm7tmd9hbtdje757jm",
@@ -51,7 +46,11 @@
         "OAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"exp://127.0.0.1:19000/--/\"],\"LogoutURLs\":[\"exp://127.0.0.1:19000/--/\"]}",
         "UserPoolName": "eeeasy7fa50027_userpool_7fa50027"
       },
-      "lastPushDirHash": "qElUQJbl2e0MhtVyhihgPOB83GI="
+      "lastPushTimeStamp": "2021-09-27T01:45:06.488Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-eeeasy-dev-194421-deployment/amplify-cfn-templates/auth/eeeasy7fa50027-cloudformation-template.yml",
+        "logicalId": "autheeeasy7fa50027"
+      }
     }
   }
 }
