@@ -15,7 +15,7 @@ import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import Main from '../screens/Main';
-import TabTwoScreen from '../screens/TabTwoScreen';
+import SendInfo from '../screens/SendInfo';
 import WaitingCompany from '../screens/WaitingCompany';
 import Coupon from '../screens/Coupon';
 import Profile from '../screens/Profile';
@@ -88,10 +88,10 @@ function BottomTabNavigator() {
         })}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
+        name="SendInfo"
+        component={SendInfo}
         options={{
-          title: 'Tab Two',
+          title: 'データの送信',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />
