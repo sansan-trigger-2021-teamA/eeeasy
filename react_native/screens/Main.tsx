@@ -4,8 +4,23 @@ import { StyleSheet, ScrollView,SafeAreaView,Button } from 'react-native';
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
+import * as Location from "expo-location";
+import { useEffect } from 'react';
 
 export default function Main({ navigation }: RootTabScreenProps<'Main'>) {
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        console.log('Permission to access location was denied');
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      console.log(location);
+    })();
+  }, []);
 
   const userName = () => {
     return "sansan"

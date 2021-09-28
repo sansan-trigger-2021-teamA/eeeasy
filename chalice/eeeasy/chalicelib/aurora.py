@@ -45,13 +45,13 @@ def create_user(profile):
     age = int(profile["age"])
     job = profile["job"]
     email = profile["email"]
-    query = f"INSERT INTO Users(Name, Email, Gender, Age, Job) VALUES({name}, {email}, {gender}, {age}, {job})"
+    query = "INSERT INTO Users(Name, Email, Gender, Age, Job) VALUES(%s, %s, %s,%s, %s)"
     conn = connect_RDS()
     message = ""
     if conn == type(str):
       return "error"
     with conn.cursor() as cur:
-        cur.execute(query)
+        cur.execute(query,(name,email,gender,age,job))
         conn.commit()
         status = 200
         message = "success"
@@ -60,8 +60,14 @@ def create_user(profile):
     return responce
 
 def edit_profile(profile):
-    name = profile["name"]
+    email = profile["email"]
     job = profile["job"]	
-    query = f"UPDATE Users SET Job={job} WHERE Name={name}"
-    conn = connect_RDS()
+    query = f"UPDATE Users SET Job = %s WHERE Email = %s"
+    with conn.cursor() as cur:
+        cur.execute(query,(job,email))
+        conn.commit()
+        status = 200
+        message = "success"
     conn.close()
+
+    conn = connect_RDS()

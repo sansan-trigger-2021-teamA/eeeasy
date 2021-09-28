@@ -11,5 +11,6 @@ web-build/
 ./amplify/.config
 /yarn.lock
 
+yarn.lock
 # macOS
 .DS_Store

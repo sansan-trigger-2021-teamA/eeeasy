@@ -18,16 +18,19 @@ def set_gps(data):
     try:
         key = "test"
         env.s3_client.put_object(Bucket=S3_BUCKET_NAME, Key=key,Body=json.dumps(data))
-        return {'save': 'success'}
+        status = 200
+        return {"statusCode":status,"message":"success"}
 
     except Exception as e:
         logger.warn(e)
-        return {'save':'failure'}
+        status = 400
+        return {"statusCode":status,"message":e}
 
-def get_gps(data):
+
+def get_gps():
     try:
         key = "test.json"
-        url = s3.generate_presigned_url(
+        url = env.s3_client.generate_presigned_url(
             'get_object',
             Params={
                 'Bucket': S3_BUCKET_NAME,
@@ -44,6 +47,6 @@ def get_gps(data):
         logger.warn(e)
         return {
             'statusCode':'400',
-            'body':'400 error'
+            'body':e
             }
 
