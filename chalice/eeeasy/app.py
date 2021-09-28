@@ -1,43 +1,52 @@
 from chalice import Chalice
 import boto3
-import json
+import base64
+from botocore.exceptions import ClientError
+import os
+import pymysql
+import chalicelib.s3 as s3
+import chalicelib.aurora as aurora
 
-BUCKET_NAME = 'eeeasy-s3'
-s3 = boto3.client('s3')
 app = Chalice(app_name='eeeasy')
 app.debug = True
-
+DB_USER = os.environ["USER"]
+DB_PASSWORD = os.environ["PASSWORD"]
+DB_HOST = os.environ["PROXY_END_POINT"]
+# DB_HOST = os.environ["WRITER_DB_END_POINT"]
+DB_NAME = os.environ["DB_NAME"]
+#rds settings
+ 
 @app.route('/')
 def index():
-    return {'hello': 'world'}
+    test = "error"
+    try:
+        conn = pymysql.connect(host=DB_HOST, user=DB_USER, passwd=DB_PASSWORD, db=DB_NAME, connect_timeout=5)
+        conn.close()
+        test = "success"
+        return {'hello': test}
+
+    except Exception  as e:
+        print("Fail connecting to RDS mysql instance")
+        print(e)
+        return {"error":"error"}
 
 @app.route('/save', methods=['POST'], content_types=['application/json'],cors=True)
 def save():
     data = app.current_request.json_body
     if 'key' not in data:
         return {'error': 'please input key'}
-    key = str(data['key'])+'.json'
-    s3.put_object(Bucket=BUCKET_NAME, Key=key,
-                  Body=json.dumps(data))
-    return {'save': data['key']}
+    responce = s3.create_bucket(data)
+    return responce
+    
+@app.route('/create-table', methods=['POST'], content_types=['application/json'],cors=True)
+def create_table():
+    query = "CREATE Table Users ( UserId int NOT NULL AUTO_INCREMENT, Name VARCHAR(255) NOT NULL, Gender VARCHAR(20) NOT NULL, Age TINYINT NOT NULL, Job VARCHAR(20) NOT NULL, PRIMARY KEY (UserId))"
+    responce = aurora.create_table(query)
+    return {"status":responce}
 
+@app.route('/create-user', methods=['POST'], content_types=['application/json'],cors=True)
+def create_user():
+    data = app.current_request.json_body
+    responce = aurora.create_user(data)
+    return {"status":responce}
 
-# The view function above will return {"hello": "world"}
-# whenever you make an HTTP GET request to '/'.
-#
-# Here are a few more examples:
-#
-# @app.route('/hello/{name}')
-# def hello_name(name):
-#    # '/hello/james' -> {"hello": "james"}
-#    return {'hello': name}
-#
-# @app.route('/users', methods=['POST'])
-# def create_user():
-#     # This is the JSON body the user sent in their POST request.
-#     user_as_json = app.current_request.json_body
-#     # We'll echo the json body back to the user in a 'user' key.
-#     return {'user': user_as_json}
-#
-# See the README documentation for more examples.
-#
