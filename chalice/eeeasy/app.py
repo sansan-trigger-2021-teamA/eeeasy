@@ -40,13 +40,29 @@ def save():
     
 @app.route('/create-table', methods=['POST'], content_types=['application/json'],cors=True)
 def create_table():
-    query = "CREATE Table Users ( UserId int NOT NULL AUTO_INCREMENT, Name VARCHAR(255) NOT NULL, Gender VARCHAR(20) NOT NULL, Age TINYINT NOT NULL, Job VARCHAR(20) NOT NULL, PRIMARY KEY (UserId))"
-    responce = aurora.create_table(query)
-    return {"status":responce}
+    query = "CREATE TABLE Users ( UserId int NOT NULL AUTO_INCREMENT, Name VARCHAR(255) NOT NULL, Email VARCHAR(255) NOT NULL, CognitoId, Gender VARCHAR(20) NOT NULL, Age TINYINT NOT NULL, Job VARCHAR(20) NOT NULL, PRIMARY KEY (UserId))"
+    responce = aurora.execute_query(query)
+    return responce
+
+@app.route('/delete-table', methods=['DELETE'], content_types=['application/json'],cors=True)
+def create_table():
+    query = "DROP TABLE Users"
+    responce = aurora.execute_query(query)
+    return responce
 
 @app.route('/create-user', methods=['POST'], content_types=['application/json'],cors=True)
 def create_user():
     data = app.current_request.json_body
     responce = aurora.create_user(data)
-    return {"status":responce}
+    return responce
 
+@app.route('/set-gps', methods=['POST'], content_types=['application/json'],cors=True)
+def set_gps():
+    data = app.current_request.json_body
+    responce = aurora.create_user(data)
+    return responce
+
+@app.route('/get-gps',methods=['GET'])
+def get_gps():
+    responce = aurora.create_user(data)
+    return responce
