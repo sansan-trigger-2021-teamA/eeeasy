@@ -10,5 +10,6 @@ npm-debug.*
 web-build/
 ./amplify/.config
 
+yarn.lock
 # macOS
 .DS_Store
