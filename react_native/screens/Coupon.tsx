@@ -6,6 +6,7 @@ import {
   FlatList,
   Dimensions,
   ImageBackground,
+  ListRenderItem,
 } from "react-native";
 import { Text, View } from "../components/Themed";
 import { Appearance, useColorScheme } from "react-native-appearance";
@@ -32,6 +33,7 @@ Appearance.getColorScheme();
 
 export default function Coupons() {
   const colorScheme = useColorScheme();
+
   return (
     <SafeAreaView
       style={
@@ -40,24 +42,22 @@ export default function Coupons() {
           : styles.containerForBlack
       }
     >
-      <ScrollView style={styles.scrollView}>
-        <FlatList
-          data={CouponList}
-          keyExtractor={(item, index) => index.toString()}
-          numColumns={2}
-          renderItem={({ item }) => (
-            <View key={item.id} style={styles.coupon}>
-              <ImageBackground
-                source={{ uri: "https://source.unsplash.com/random" }}
-                style={styles.imageStyle}
-              >
-                <Text style={styles.getStartedText}>{item.companyName}</Text>
-                <Text style={styles.getStartedText}>{item.couponName}</Text>
-              </ImageBackground>
-            </View>
-          )}
-        />
-      </ScrollView>
+      <FlatList
+        data={CouponList}
+        keyExtractor={(item, index) => index.toString()}
+        numColumns={2}
+        renderItem={({ item }) => (
+          <View key={item.id} style={styles.coupon}>
+            <ImageBackground
+              source={{ uri: "https://source.unsplash.com/random" }}
+              style={styles.imageStyle}
+            >
+              <Text style={styles.getStartedText}>{item.companyName}</Text>
+              <Text style={styles.getStartedText}>{item.couponName}</Text>
+            </ImageBackground>
+          </View>
+        )}
+      />
     </SafeAreaView>
   );
 }
@@ -66,14 +66,12 @@ const styles = StyleSheet.create({
   containerForWhite: {
     flex: 1,
     justifyContent: "center",
-    // paddingTop: Constants.statusBarHeight,
     padding: 16,
     backgroundColor: "white",
   },
   containerForBlack: {
     flex: 1,
     justifyContent: "center",
-    // paddingTop: Constants.statusBarHeight,
     padding: 16,
     backgroundColor: "black",
   },
@@ -104,7 +102,6 @@ const styles = StyleSheet.create({
   imageStyle: {
     width: ITEM_WIDTH / 2,
     height: ITEM_WIDTH / 3,
-    // margin: 1,
     resizeMode: "cover",
   },
 });

@@ -13,11 +13,20 @@ export default function RegisterProfile({
   navigation,
 }: RootTabScreenProps<"RegisterProfile">) {
   const [openJobSelect, setOpenJobSelect] = React.useState(false);
+  const [userName, setUserName] = React.useState<string>("");
   const [sex, setSex] = React.useState<string | null>(null);
   const [job, setJob] = React.useState(null);
   return (
     <View style={styles.container}>
       <View style={styles.Box}>
+        <Text>ユーザーネーム</Text>
+        <View style={styles.usernameBox}>
+          <TextInput
+            style={styles.usernameInput}
+            value={userName}
+            onChangeText={setUserName}
+          />
+        </View>
         <Text>生年月日</Text>
         <View style={styles.rowBox}>
           <TextInput style={styles.input} />
@@ -116,5 +125,15 @@ const styles = StyleSheet.create({
   },
   Button: {
     marginVertical: 20,
+  },
+  usernameBox: {
+    marginHorizontal: "auto",
+    marginVertical: 20,
+  },
+  usernameInput: {
+    height: 40,
+    borderWidth: 1,
+    paddingHorizontal: 30,
+    opacity: 0.8,
   },
 });
