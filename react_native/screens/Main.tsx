@@ -6,29 +6,20 @@ import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 import * as Location from "expo-location";
 import { useEffect } from 'react';
-import Amplify, {Auth} from 'aws-amplify';
 
 export default function Main({ navigation }: RootTabScreenProps<'Main'>) {
 
-  // useEffect(() => {
-  //   (async () => {
-  //     let { status } = await Location.requestForegroundPermissionsAsync();
-  //     if (status !== 'granted') {
-  //       console.log('Permission to access location was denied');
-  //       return;
-  //     }
-
-  //     let location = await Location.getCurrentPositionAsync({});
-  //     console.log(location);
-  //   })();
-  // }, []);
-
   useEffect(() => {
-    const init = async() => {
-        const currentUser = await Auth.currentAuthenticatedUser();
-        console.log(currentUser["attributes"]["email"]);
-    }
-    init()
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        console.log('Permission to access location was denied');
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      console.log(location);
+    })();
   }, []);
 
   const userName = () => {
