@@ -51,15 +51,8 @@ export default function Coupons() {
                 source={{ uri: "https://source.unsplash.com/random" }}
                 style={styles.imageStyle}
               >
-                <Text style={styles.getStartedText}>
-                  {item.companyName}
-                </Text>
+                <Text style={styles.getStartedText}>{item.companyName}</Text>
                 <Text style={styles.getStartedText}>{item.couponName}</Text>
-                {/* <View
-                style={styles.separator}
-                lightColor="#eee"
-                darkColor="rgba(255,255,255,0.1)"
-              /> */}
               </ImageBackground>
             </View>
           )}
