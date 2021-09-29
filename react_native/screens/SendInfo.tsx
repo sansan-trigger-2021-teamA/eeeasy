@@ -20,6 +20,14 @@ export default function SendInfo() {
       </View>
       <View style={styles.buttonContainer}>
         <Button
+          text="身分証の送信"
+          onPress={() => {
+            navigation.navigate("SendIdCard");
+          }}
+        />
+      </View>
+      <View style={styles.buttonContainer}>
+        <Button
           text="ウェアラブル端末との連携"
           onPress={() => alert("ウェアラブル端末との連携")}
         />
