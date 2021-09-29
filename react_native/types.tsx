@@ -25,6 +25,7 @@ export type RootStackParamList = {
   NotFound: undefined;
   RegisterProfile: NavigatorScreenParams<RootTabParamList> | undefined;
   SendIdCard: undefined;
+  TransmissionInformationSetting: undefined;
 };
 
 export type RootStackScreenProps<
