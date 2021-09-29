@@ -71,7 +71,11 @@ function RootNavigator() {
         options={{ title: "Oops!" }}
       />
       <Stack.Group screenOptions={{ presentation: "modal" }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
+        <Stack.Screen
+          name="Modal"
+          component={ModalScreen}
+          options={{ headerShown: true, title: "プロフィール登録" }}
+        />
       </Stack.Group>
     </Stack.Navigator>
   );
