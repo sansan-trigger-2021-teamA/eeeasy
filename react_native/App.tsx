@@ -21,7 +21,7 @@ Amplify.configure({
   },
 });
 
-//backgroundGeoLocations()
+backgroundGeoLocations()
 function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();

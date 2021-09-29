@@ -8,20 +8,20 @@ import {sendGeoData} from  "./sendGeoData"
 
 
 export const backgroundGeoLocations =  () => {
-    const LOCATION_TASK_NAME = 'GPS';
+    const LOCATION_TASK_NAME = 'background';
 
-    // TaskManager.defineTask(LOCATION_TASK_NAME, ({ data, error }) => {
-    //     if (error) {
-    //         console.log("error",error);
-    //         return
-    //     }
-    //     if (data) {
-    //         sendGeoData(data)
-    //     }
-    // });
+    TaskManager.defineTask(LOCATION_TASK_NAME, async ({ data, error }) => {
+        if (error) {
+            console.log("error",error);
+            return
+        }
+        if (data.locations) {
+            sendGeoData(data.locations[0])
+        }
+    });
 
-    // Location.startLocationUpdatesAsync(LOCATION_TASK_NAME,{
-    // timeInterval:15000,
-    // })
+    Location.startLocationUpdatesAsync(LOCATION_TASK_NAME,{
+    timeInterval:100000,
+    })
 
 }
