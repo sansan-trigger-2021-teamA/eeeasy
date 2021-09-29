@@ -39,15 +39,7 @@ export default function SendHealthCheckDataScreen() {
 
   return (
     <View style={styles.container}>
-      <Button
-        text="送信する画像を撮影"
-        onPress={takePhoto}
-        style={
-          colorScheme === "dark"
-            ? { ...{ text: styles.buttonWhite } }
-            : { ...{ text: styles.buttonBlack } }
-        }
-      />
+      <Button text="送信する画像を撮影" onPress={takePhoto} />
       {image && (
         <>
           <Image
@@ -59,11 +51,6 @@ export default function SendHealthCheckDataScreen() {
             onPress={() => {
               alert("送信処理は未実装");
             }}
-            style={
-              colorScheme === "dark"
-                ? { ...{ text: styles.buttonWhite } }
-                : { ...{ text: styles.buttonBlack } }
-            }
           />
         </>
       )}
