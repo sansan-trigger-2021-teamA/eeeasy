@@ -87,34 +87,11 @@ def set_gps():
     # else:
     #     responce["message"] = "error"
     return responce
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+@app.route('/update-job', methods=['POST'], content_types=['application/json'],cors=True)
+def edit_profile():
+    data = app.current_request.json_body
+    responce = aurora.edit_profile(data)
+    return responce
 
 
 

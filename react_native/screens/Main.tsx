@@ -10,7 +10,8 @@ import * as Notifications from 'expo-notifications';
 import Constants from 'expo-constants';
 import { Subscription } from '@unimodules/core';
 
-export default function Main({ navigation }: RootTabScreenProps<'Main'>) {
+  
+export default function Main({ navigation }: RootTabScreenProps<"Main">) {
   const notificationListener = useRef<Subscription>();
   const responseListener = useRef<Subscription>();
   const [expoPushToken, setExpoPushToken] = useState('');
@@ -59,10 +60,7 @@ export default function Main({ navigation }: RootTabScreenProps<'Main'>) {
       response && Notifications.removeNotificationSubscription(response)
     }
   }, []);
-  
-import { useEffect } from "react";
 
-export default function Main({ navigation }: RootTabScreenProps<"Main">) {
   React.useEffect(() => {
     navigation.navigate("Modal");
   }, []);

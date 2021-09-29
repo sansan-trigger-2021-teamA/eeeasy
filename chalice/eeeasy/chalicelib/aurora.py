@@ -63,14 +63,16 @@ def edit_profile(profile):
     email = profile["email"]
     job = profile["job"]	
     query = f"UPDATE Users SET Job = %s WHERE Email = %s"
+    conn = connect_RDS()
     with conn.cursor() as cur:
         cur.execute(query,(job,email))
         conn.commit()
         status = 200
         message = "success"
     conn.close()
-
-    conn = connect_RDS()
+    responce = {"statusCode":status,"message":message}
+    return responce
+    
 
 def insert_gps(email,filename):
     query = "INSERT INTO Gps(FileName) VALUES(%s)"

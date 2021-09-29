@@ -140,7 +140,7 @@ app.post('/items', async function(req, res) {
       // ticketsをデータベースに保存するような処理
   }
   const messages = await getMessages("test");
-  const tickets = sendPushNotifications(messages);
+  const tickets = await sendPushNotifications(messages);
 
   res.json({success: 'post call succeed!', url: req.url, body: req.body})
 });
