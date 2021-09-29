@@ -33,7 +33,12 @@ export default function SendInfo() {
         />
       </View>
       <View style={styles.buttonContainer}>
-        <Button text="送信情報の設定" onPress={() => alert("送信情報の設定")} />
+        <Button
+          text="送信情報の設定"
+          onPress={() => {
+            navigation.navigate("TransmissionInformationSetting");
+          }}
+        />
       </View>
     </View>
   );

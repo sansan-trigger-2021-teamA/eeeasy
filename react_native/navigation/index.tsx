@@ -32,6 +32,7 @@ import LinkingConfiguration from "./LinkingConfiguration";
 import SendHealthCheckDataScreen from "../screens/SendHealthCheckDataScreen";
 import TermOfServiceModal from "../screens/TermOfServiceModal";
 import SendIdCard from "../screens/SendIdCard";
+import { TransmissionInformationSetting } from "../screens/TransmissionInformationSetting";
 
 export default function Navigation({
   colorScheme,
@@ -67,12 +68,38 @@ function RootNavigator() {
       <Stack.Screen
         name="SendHealthCheckDataScreen"
         component={SendHealthCheckDataScreen}
-        options={{ headerShown: true, title: "健康診断データの送信" }}
+        options={{
+          headerShown: true,
+          title: "健康診断データの送信",
+          headerStyle: {
+            backgroundColor: "#2A2B37",
+          },
+          headerTintColor: "#E2C792",
+        }}
       />
       <Stack.Screen
         name="SendIdCard"
         component={SendIdCard}
-        options={{ headerShown: true, title: "身分証の送信" }}
+        options={{
+          headerShown: true,
+          title: "身分証の送信",
+          headerStyle: {
+            backgroundColor: "#2A2B37",
+          },
+          headerTintColor: "#E2C792",
+        }}
+      />
+      <Stack.Screen
+        name="TransmissionInformationSetting"
+        component={TransmissionInformationSetting}
+        options={{
+          headerShown: true,
+          title: "送信情報の設定",
+          headerStyle: {
+            backgroundColor: "#2A2B37",
+          },
+          headerTintColor: "#E2C792",
+        }}
       />
       <Stack.Screen
         name="NotFound"

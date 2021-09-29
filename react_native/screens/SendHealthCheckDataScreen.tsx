@@ -1,11 +1,12 @@
 import Constants from "expo-constants";
 import * as React from "react";
 import { StyleSheet, Image, Platform } from "react-native";
-import { Text, View } from "../components/Themed";
+import { View } from "../components/Themed";
 import * as ImagePicker from "expo-image-picker";
 import { Button } from "react-native-material-ui";
 import { Appearance, useColorScheme } from "react-native-appearance";
 import { Camera } from "expo-camera";
+import { sendImage } from '../controllers/sendImage';
 Appearance.getColorScheme();
 
 interface imageType {
@@ -14,7 +15,6 @@ interface imageType {
 
 export default function SendHealthCheckDataScreen() {
   const [image, setImage] = React.useState<imageType | null>(null);
-  const colorScheme = useColorScheme();
 
   React.useEffect(() => {
     (async () => {
@@ -49,7 +49,7 @@ export default function SendHealthCheckDataScreen() {
           <Button
             text="送信する"
             onPress={() => {
-              alert("送信処理は未実装");
+              sendImage(image);
             }}
           />
         </>
