@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "Root Stack for AWS Amplify CLI",
+  "Description": "Root Stack for AWS Amplify Console",
   "Parameters": {
     "DeploymentBucketName": {
       "Description": "Name of the common deployment bucket provided by the parent stack",
@@ -83,7 +83,7 @@
         "TemplateURL": "https://s3.amazonaws.com/amplify-eeeasy-dev-194421-deployment/amplify-cfn-templates/auth/eeeasy7fa50027-cloudformation-template.yml",
         "Parameters": {
           "identityPoolName": "eeeasy7fa50027_identitypool_7fa50027",
-          "allowUnauthenticatedIdentities": false,
+          "allowUnauthenticatedIdentities": true,
           "resourceNameTruncated": "eeeasy7fa50027",
           "userPoolName": "eeeasy7fa50027_userpool_7fa50027",
           "autoVerifiedAttributes": "email",
@@ -131,6 +131,38 @@
           "usernameCaseSensitive": false,
           "dependsOn": "",
           "hostedUIProviderCreds": "[]",
+          "env": "dev"
+        }
+      }
+    },
+    "functionnodeAPI": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-eeeasy-dev-194421-deployment/amplify-cfn-templates/function/nodeAPI-cloudformation-template.json",
+        "Parameters": {
+          "deploymentBucketName": "amplify-eeeasy-dev-194421-deployment",
+          "s3Key": "amplify-builds/nodeAPI-59546f4a58342b316d65-build.zip",
+          "env": "dev"
+        }
+      }
+    },
+    "apinodeAPI": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-eeeasy-dev-194421-deployment/amplify-cfn-templates/api/nodeAPI-cloudformation-template.json",
+        "Parameters": {
+          "functionnodeAPIName": {
+            "Fn::GetAtt": [
+              "functionnodeAPI",
+              "Outputs.Name"
+            ]
+          },
+          "functionnodeAPIArn": {
+            "Fn::GetAtt": [
+              "functionnodeAPI",
+              "Outputs.Arn"
+            ]
+          },
           "env": "dev"
         }
       }

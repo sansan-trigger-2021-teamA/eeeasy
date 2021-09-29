@@ -38,20 +38,22 @@ def execute_query(query):
 
 def create_user(profile):
     """
-    '{"name":"test1","gender":"女",email:"test@mail","age":"22","job":"会社員"}'
+    '{"name":"test1","gender":"女","email":"test@mail","age":"22","job":"会社員","sub":"test"}'
     """
+
     name = profile["name"]
     gender = profile["gender"]
     age = int(profile["age"])
     job = profile["job"]
     email = profile["email"]
-    query = "INSERT INTO Users(Name, Email, Gender, Age, Job) VALUES(%s, %s, %s,%s, %s)"
+    sub = profile["sub"]
+    query = "INSERT INTO Users(Name, Email, Gender, Age, Job, Sub) VALUES(%s, %s, %s,%s, %s, %s)"
     conn = connect_RDS()
     message = ""
     if conn == type(str):
       return "error"
     with conn.cursor() as cur:
-        cur.execute(query,(name,email,gender,age,job))
+        cur.execute(query,(name,email,gender,age,job,sub))
         conn.commit()
         status = 200
         message = "success"
@@ -63,14 +65,43 @@ def edit_profile(profile):
     email = profile["email"]
     job = profile["job"]	
     query = f"UPDATE Users SET Job = %s WHERE Email = %s"
+    conn = connect_RDS()
     with conn.cursor() as cur:
         cur.execute(query,(job,email))
         conn.commit()
         status = 200
         message = "success"
     conn.close()
+    responce = {"statusCode":status,"message":message}
+    return responce
 
+def set_pushtoken(profile):
+    email = profile["email"]
+    pushtoken = profile["pushtoken"]	
+    query = f"UPDATE Users SET PushToken = %s WHERE Email = %s"
     conn = connect_RDS()
+    with conn.cursor() as cur:
+        cur.execute(query,(pushtoken,email))
+        conn.commit()
+        status = 200
+        message = "success"
+    conn.close()
+    responce = {"statusCode":status,"message":message}
+    return responce
+
+def select_user(profile):
+    email = profile["email"]
+    query = f"SELECT * Users WHERE Email = %s"
+    conn = connect_RDS()
+    with conn.cursor() as cur:
+        cur.execute(query,(email))
+        conn.commit()
+        status = 200
+        message = "success"
+    conn.close()
+    responce = {"statusCode":status,"message":message}
+    return responce
+    
 
 def insert_gps(email,filename):
     query = "INSERT INTO Gps(FileName) VALUES(%s)"

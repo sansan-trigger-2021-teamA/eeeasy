@@ -55,3 +55,27 @@ def get_gps():
             'body':e
             }
 
+def set_image(data):
+    email = data["email"]
+    dt_now = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9)))
+    date = str(dt_now.date())
+    time = str(dt_now.time())
+    FILE_NAME = "image/"+date+"/"+email+time#subID
+    url = env.s3_client.generate_presigned_url(
+        ClientMethod='put_object',
+        Params={
+            'Bucket': S3_BUCKET_NAME, 
+            'Key': FILE_NAME
+        },
+        ExpiresIn=100,
+        HttpMethod='PUT')
+
+    return {
+       'statusCode': 200,
+       'statusDescription': '200 OK',
+       'isBase64Encoded': False,
+       'headers': {
+           'Content-Type': 'text/html; charset=utf-8'
+        },
+        'body': '{}\n'.format(url)
+    }
