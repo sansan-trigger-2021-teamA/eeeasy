@@ -18,14 +18,14 @@ interface CouponInterface {
 }
 
 const CouponList: CouponInterface[] = [
-  { id: 1, companyName: "a", couponName: "a's coupon" },
-  { id: 2, companyName: "b", couponName: "b's coupon" },
-  { id: 3, companyName: "c", couponName: "c's coupon" },
-  { id: 4, companyName: "d", couponName: "d's coupon" },
-  { id: 5, companyName: "e", couponName: "e's coupon" },
-  { id: 6, companyName: "f", couponName: "f's coupon" },
-  { id: 7, companyName: "g", couponName: "g's coupon" },
-  { id: 8, companyName: "h", couponName: "h's coupon" },
+  { id: 1, companyName: "企業A", couponName: "クーポンA" },
+  { id: 2, companyName: "企業B", couponName: "クーポンB" },
+  { id: 3, companyName: "企業C", couponName: "クーポンC" },
+  { id: 4, companyName: "企業D", couponName: "クーポンD" },
+  { id: 5, companyName: "企業E", couponName: "クーポンE" },
+  { id: 6, companyName: "企業F", couponName: "クーポンF" },
+  // { id: 7, companyName: "g", couponName: "g's coupon" },
+  // { id: 8, companyName: "h", couponName: "h's coupon" },
 ];
 
 const ITEM_WIDTH = Dimensions.get("window").width;
@@ -50,6 +50,7 @@ export default function Coupons() {
           <View key={item.id} style={styles.coupon}>
             <ImageBackground
               source={{ uri: "https://source.unsplash.com/random" }}
+              // source={require("../assets/images/coupon.png")}
               style={styles.imageStyle}
             >
               <Text style={styles.getStartedText}>{item.companyName}</Text>
