@@ -1,3 +1,4 @@
+
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -14,6 +15,7 @@ import * as BackgroundFetch from "expo-background-fetch"
 import * as TaskManager from "expo-task-manager"
 import * as Location from 'expo-location';
 
+
 Amplify.configure({
   ...awsmobile,
   Analytics: {
@@ -21,20 +23,24 @@ Amplify.configure({
   },
 });
 
+
 backgroundGeoLocations()
 function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
   
-  
+
   if (!isLoadingComplete) {
     return null;
   } else {
     return (
-      <SafeAreaProvider>
-        <Navigation colorScheme={colorScheme} />
-        <StatusBar />
-      </SafeAreaProvider>
+      <AuthProvider>
+        <SafeAreaProvider>
+          <StatusBar barStyle="light-content" />
+          <Navigation colorScheme={colorScheme} />
+          <StatusBar />
+        </SafeAreaProvider>
+      </AuthProvider>
     );
   }
 }
@@ -43,12 +49,5 @@ export default withAuthenticator(App, {
   signUpConfig: {
     hiddenDefaults: ["phone_number", "email"],
   },
-});
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
+  // includeGreetings: true,
 });

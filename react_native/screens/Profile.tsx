@@ -6,6 +6,7 @@ import Dialog from "react-native-dialog";
 import DropDownPicker from "react-native-dropdown-picker";
 import { Appearance, useColorScheme } from "react-native-appearance";
 import { color } from "react-native-reanimated";
+import { UserContext } from "../context/UserContext";
 
 Appearance.getColorScheme();
 
@@ -19,10 +20,30 @@ const profile = {
 
 //職業
 export default function Profile() {
+  const context = React.useContext(UserContext);
   const [visible, setVisible] = React.useState(false);
-  const [job, setJob] = React.useState(null);
+  const [job, setJob] = React.useState(context.user?.job);
   const [openJobSelect, setOpenJobSelect] = React.useState(false);
   const colorScheme = useColorScheme();
+  const [age, setAge] = React.useState<number>(0);
+
+  React.useEffect(() => {
+    calcAge();
+  }, []);
+
+  const calcAge = () => {
+    const birthDay = context.user?.birthday;
+    if (birthDay) {
+      const today = new Date();
+      const thisYearBirthday = new Date(
+        today.getFullYear(),
+        birthDay.getMonth() - 1,
+        birthDay.getDate()
+      );
+      const ageNow = today.getFullYear() - birthDay.getFullYear();
+      setAge(ageNow);
+    }
+  };
 
   const showDialog = () => {
     setVisible(true);
@@ -33,23 +54,16 @@ export default function Profile() {
   };
 
   const handleDelete = () => {
-    // The user has pressed the "Delete" button, so here you can do your own logic.
-    // ...Your logic
+    context.setUser({ ...context.user, job: job });
     setVisible(false);
   };
 
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.title}>確認&編集</Text>
-      <View
-        style={styles.separator}
-        lightColor="#eee"
-        darkColor="rgba(255,255,255,0.1)"
-      /> */}
-      <Text style={styles.infoText}>name:{profile.name}</Text>
-      <Text style={styles.infoText}>sex:{profile.sex}</Text>
-      <Text style={styles.infoText}>age:{profile.age}</Text>
-      <Text style={styles.infoText}>job:{profile.job}</Text>
+      <Text style={styles.infoText}>name:{context.user?.userName}</Text>
+      <Text style={styles.infoText}>sex:{context.user?.sex}</Text>
+      <Text style={styles.infoText}>age:{age}</Text>
+      <Text style={styles.infoText}>job:{job}</Text>
       <View>
         <Button
           text="職業を変更"

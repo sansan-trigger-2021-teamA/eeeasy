@@ -21,12 +21,9 @@
       "supportsTablet": true,
       "bundleIdentifier": "jp.teamA.app",
       "infoPlist": {
-        "UIBackgroundModes": [
-          "location",
-          "fetch"
-        ]
+        "UIUserInterfaceStyle": "light",
+        "UIBackgroundModes": ["location", "fetch"]
       }
-
     },
     "android": {
       "adaptiveIcon": {
