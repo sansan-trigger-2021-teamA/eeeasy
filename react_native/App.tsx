@@ -9,7 +9,7 @@ import { StyleSheet} from 'react-native';
 import Amplify from '@aws-amplify/core';
 import awsmobile from './src/aws-exports';
 import {withAuthenticator} from 'aws-amplify-react-native';
-//import { registerTask } from './controllers/backendGeoLocation'
+import { backgroundGeoLocations } from './controllers/backgroundGeoLocations'
 import * as BackgroundFetch from "expo-background-fetch"
 import * as TaskManager from "expo-task-manager"
 import * as Location from 'expo-location';
@@ -21,28 +21,11 @@ Amplify.configure({
   },
 });
 
-const LOCATION_TASK_NAME = 'background-location-task';
-
-TaskManager.defineTask(LOCATION_TASK_NAME, ({ data, error }) => {
-  if (error) {
-    // Error occurred - check `error.message` for more details.
-    console.log(error)
-    return;
-  }
-  if (data) {
-    console.log(data);
-    // do something with the locations captured in the background
-  }
-});
-
-Location.startLocationUpdatesAsync(LOCATION_TASK_NAME,{
-  timeInterval:1000,
-})
-
+//backgroundGeoLocations()
 function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
-
+  
   
   if (!isLoadingComplete) {
     return null;
