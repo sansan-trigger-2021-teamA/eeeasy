@@ -33,7 +33,8 @@ export default function Profile() {
   }, []);
 
   const calcAge = () => {
-    const birthDay = context.user?.birthday;
+    const birthDay = new Date(context.user?.birthday);
+    console.log(birthDay)
     if (birthDay) {
       const today = new Date();
       const thisYearBirthday = new Date(

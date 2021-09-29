@@ -1,5 +1,7 @@
 import * as React from "react";
 import { StyleSheet, ScrollView, SafeAreaView } from "react-native";
+import  AsyncStorage  from "@react-native-async-storage/async-storage"
+import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
 import { RootTabScreenProps } from "../types";
 import { UserContext } from "../context/UserContext";
@@ -14,7 +16,13 @@ export default function Main({ navigation }: RootTabScreenProps<"Main">) {
   const [graph, setGraph] = React.useState(false);
 
   React.useEffect(() => {
-    navigation.navigate("Modal");
+    AsyncStorage.getItem("User").then((user) => {
+      if(user){
+        context.setUser(JSON.parse(user))
+        return
+      }
+      navigation.navigate("Modal");
+    })
   }, []);
 
   useEffect(() => {
@@ -25,8 +33,8 @@ export default function Main({ navigation }: RootTabScreenProps<"Main">) {
         return;
       }
 
-      let location = await Location.getCurrentPositionAsync({});
-      console.log(location);
+      // let location = await Location.getCurrentPositionAsync({});
+      // console.log(location);
     })();
   }, []);
 
