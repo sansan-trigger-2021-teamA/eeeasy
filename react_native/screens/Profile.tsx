@@ -42,7 +42,6 @@ export default function Profile() {
       );
       const ageNow = today.getFullYear() - birthDay.getFullYear();
       setAge(ageNow);
-      alert("実行されました");
     }
   };
 

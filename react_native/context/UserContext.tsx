@@ -10,7 +10,7 @@ export interface User {
 
 const defaultUser: User = {
   id: "fafsda",
-  userName: "default",
+  userName: "山田太郎",
   birthday: new Date(),
   sex: "男性",
   job: "学生",
