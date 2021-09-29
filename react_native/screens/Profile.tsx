@@ -6,6 +6,10 @@ import Dialog from "react-native-dialog";
 import DropDownPicker from "react-native-dropdown-picker";
 import { Appearance, useColorScheme } from "react-native-appearance";
 import { color } from "react-native-reanimated";
+<<<<<<< HEAD
+=======
+import { UserContext } from "../context/UserContext";
+>>>>>>> origin/main
 
 Appearance.getColorScheme();
 
@@ -19,10 +23,30 @@ const profile = {
 
 //職業
 export default function Profile() {
+  const context = React.useContext(UserContext);
   const [visible, setVisible] = React.useState(false);
-  const [job, setJob] = React.useState(null);
+  const [job, setJob] = React.useState(context.user?.job);
   const [openJobSelect, setOpenJobSelect] = React.useState(false);
   const colorScheme = useColorScheme();
+  const [age, setAge] = React.useState<number>(0);
+
+  React.useEffect(() => {
+    calcAge();
+  }, []);
+
+  const calcAge = () => {
+    const birthDay = context.user?.birthday;
+    if (birthDay) {
+      const today = new Date();
+      const thisYearBirthday = new Date(
+        today.getFullYear(),
+        birthDay.getMonth() - 1,
+        birthDay.getDate()
+      );
+      const ageNow = today.getFullYear() - birthDay.getFullYear();
+      setAge(ageNow);
+    }
+  };
 
   const showDialog = () => {
     setVisible(true);
@@ -33,13 +57,18 @@ export default function Profile() {
   };
 
   const handleDelete = () => {
+<<<<<<< HEAD
     // The user has pressed the "Delete" button, so here you can do your own logic.
     // ...Your logic
+=======
+    context.setUser({ ...context.user, job: job });
+>>>>>>> origin/main
     setVisible(false);
   };
 
   return (
     <View style={styles.container}>
+<<<<<<< HEAD
       {/* <Text style={styles.title}>確認&編集</Text>
       <View
         style={styles.separator}
@@ -50,6 +79,12 @@ export default function Profile() {
       <Text style={styles.infoText}>sex:{profile.sex}</Text>
       <Text style={styles.infoText}>age:{profile.age}</Text>
       <Text style={styles.infoText}>job:{profile.job}</Text>
+=======
+      <Text style={styles.infoText}>name:{context.user?.userName}</Text>
+      <Text style={styles.infoText}>sex:{context.user?.sex}</Text>
+      <Text style={styles.infoText}>age:{age}</Text>
+      <Text style={styles.infoText}>job:{job}</Text>
+>>>>>>> origin/main
       <View>
         <Button
           text="職業を変更"
@@ -98,10 +133,17 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     paddingTop: "5%",
+<<<<<<< HEAD
   },
   buttonWhite: {
     color: "white",
   },
+=======
+  },
+  buttonWhite: {
+    color: "white",
+  },
+>>>>>>> origin/main
   buttonBlack: {
     color: "black",
   },

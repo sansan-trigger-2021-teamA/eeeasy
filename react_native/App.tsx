@@ -1,18 +1,44 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import useCachedResources from './hooks/useCachedResources';
-import useColorScheme from './hooks/useColorScheme';
-import Navigation from './navigation';
-import { StyleSheet} from 'react-native'; 
-import Amplify from '@aws-amplify/core';
-import awsmobile from './src/aws-exports';
-import {withAuthenticator} from 'aws-amplify-react-native';
+// import { StatusBar } from "expo-status-bar";
+import React, { useEffect, useState } from "react";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import useCachedResources from "./hooks/useCachedResources";
+import useColorScheme from "./hooks/useColorScheme";
+import Navigation from "./navigation";
+import { StyleSheet } from "react-native";
+import Amplify from "@aws-amplify/core";
+import awsmobile from "./src/aws-exports";
+// @ts-ignore
+import { withAuthenticator } from "aws-amplify-react-native";
+import { UserContext, User, AuthProvider } from "./context/UserContext";
+import * as BackgroundFetch from "expo-background-fetch";
+import * as TaskManager from "expo-task-manager";
+import * as Location from "expo-location";
+import { StatusBar } from "react-native";
+
 Amplify.configure({
   ...awsmobile,
   Analytics: {
-  disabled: true,
-},});
+    disabled: true,
+  },
+});
+
+const LOCATION_TASK_NAME = "background-location-task";
+
+TaskManager.defineTask(LOCATION_TASK_NAME, ({ data, error }) => {
+  if (error) {
+    // Error occurred - check `error.message` for more details.
+    console.log(error);
+    return;
+  }
+  if (data) {
+    console.log(data);
+    // do something with the locations captured in the background
+  }
+});
+
+Location.startLocationUpdatesAsync(LOCATION_TASK_NAME, {
+  timeInterval: 1000,
+});
 
 
 
@@ -24,23 +50,20 @@ function App() {
     return null;
   } else {
     return (
-      <SafeAreaProvider>
-        <Navigation colorScheme={colorScheme} />
-        <StatusBar />
-      </SafeAreaProvider>
+      <AuthProvider>
+        <SafeAreaProvider>
+          <StatusBar barStyle="light-content" />
+          <Navigation colorScheme={colorScheme} />
+          <StatusBar />
+        </SafeAreaProvider>
+      </AuthProvider>
     );
   }
 }
 
 export default withAuthenticator(App, {
   signUpConfig: {
-    hiddenDefaults: ['phone_number','email']
-  }});
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    hiddenDefaults: ["phone_number", "email"],
   },
+  // includeGreetings: true,
 });
