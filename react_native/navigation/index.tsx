@@ -30,6 +30,7 @@ import {
 } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import SendHealthCheckDataScreen from "../screens/SendHealthCheckDataScreen";
+import TermOfServiceModal from "../screens/TermOfServiceModal";
 
 export default function Navigation({
   colorScheme,
@@ -70,9 +71,16 @@ function RootNavigator() {
         component={NotFoundScreen}
         options={{ title: "Oops!" }}
       />
-      <Stack.Group screenOptions={{ presentation: "modal" }}>
+      <Stack.Group>
         <Stack.Screen
           name="Modal"
+          component={TermOfServiceModal}
+          options={{ headerBackVisible: false, title: "利用規約" }}
+        />
+      </Stack.Group>
+      <Stack.Group screenOptions={{ presentation: "modal" }}>
+        <Stack.Screen
+          name="RegisterProfile"
           component={ModalScreen}
           options={{ headerShown: true, title: "プロフィール登録" }}
         />
@@ -103,21 +111,21 @@ function BottomTabNavigator() {
         options={({ navigation }: RootTabScreenProps<"Main">) => ({
           title: "トップページ",
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate("Modal")}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}
-            >
-              <FontAwesome
-                name="info-circle"
-                size={25}
-                color={Colors[colorScheme].text}
-                style={{ marginRight: 15 }}
-              />
-            </Pressable>
-          ),
+          // headerRight: () => (
+          //   <Pressable
+          //     onPress={() => navigation.navigate("Modal")}
+          //     style={({ pressed }) => ({
+          //       opacity: pressed ? 0.5 : 1,
+          //     })}
+          //   >
+          //     <FontAwesome
+          //       name="info-circle"
+          //       size={25}
+          //       color={Colors[colorScheme].text}
+          //       style={{ marginRight: 15 }}
+          //     />
+          //   </Pressable>
+          // ),
         })}
       />
       <BottomTab.Screen
