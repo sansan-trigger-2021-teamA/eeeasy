@@ -81,8 +81,6 @@ app.post('/items', async function(req, res) {
   
   // const messages = req.body;
   req.body = {"test":ret};
-  const messages = await getMessages("test");
-  const tickets = await sendPushNotifications(messages);
 
   // const tickets = await sendPushNotifications(messages);
 
@@ -104,8 +102,8 @@ app.post('/items', async function(req, res) {
           {
                   "to": "ExponentPushToken[im3PhvNozRcUbsAKG6tJIF]", // Expoプッシュトークン
                   "sound": 'default',  // 通知時の音を鳴らすかどうかの設定
-                  "title": title,  // 通知タイトル
-                  "body": body  // 通知本文
+                  "title": "title",  // 通知タイトル
+                  "body": "body"  // 通知本文
               }
       ]
   }
@@ -141,6 +139,9 @@ app.post('/items', async function(req, res) {
   const saveTickets = async (tickets) => {
       // ticketsをデータベースに保存するような処理
   }
+  const messages = await getMessages("test");
+  const tickets = sendPushNotifications(messages);
+
   res.json({success: 'post call succeed!', url: req.url, body: req.body})
 });
 

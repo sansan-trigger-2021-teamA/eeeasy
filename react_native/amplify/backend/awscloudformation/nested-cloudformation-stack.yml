@@ -132,7 +132,7 @@
         "TemplateURL": "https://s3.amazonaws.com/amplify-eeeasy-dev-194421-deployment/amplify-cfn-templates/function/nodeAPI-cloudformation-template.json",
         "Parameters": {
           "deploymentBucketName": "amplify-eeeasy-dev-194421-deployment",
-          "s3Key": "amplify-builds/nodeAPI-4933362f64554648386a-build.zip",
+          "s3Key": "amplify-builds/nodeAPI-59546f4a58342b316d65-build.zip",
           "env": "dev"
         }
       }
