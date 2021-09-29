@@ -59,7 +59,9 @@ function RootNavigator() {
       <Stack.Screen
         name="Root"
         component={BottomTabNavigator}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: false,
+        }}
       />
       <Stack.Screen
         name="SendHealthCheckDataScreen"
@@ -75,14 +77,28 @@ function RootNavigator() {
         <Stack.Screen
           name="Modal"
           component={TermOfServiceModal}
-          options={{ headerBackVisible: false, title: "利用規約" }}
+          options={{
+            headerBackVisible: false,
+            title: "利用規約",
+            headerStyle: {
+              backgroundColor: "#2A2B37",
+            },
+            headerTintColor: "#E2C792",
+          }}
         />
       </Stack.Group>
       <Stack.Group screenOptions={{ presentation: "modal" }}>
         <Stack.Screen
           name="RegisterProfile"
           component={ModalScreen}
-          options={{ headerShown: true, title: "プロフィール登録" }}
+          options={{
+            headerShown: true,
+            title: "プロフィール登録",
+            headerStyle: {
+              backgroundColor: "#2A2B37",
+            },
+            headerTintColor: "#E2C792",
+          }}
         />
       </Stack.Group>
     </Stack.Navigator>
@@ -103,6 +119,9 @@ function BottomTabNavigator() {
       initialRouteName="Main"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
+        tabBarStyle: {
+          backgroundColor: "#2A2B37",
+        },
       }}
     >
       <BottomTab.Screen
@@ -110,22 +129,11 @@ function BottomTabNavigator() {
         component={Main}
         options={({ navigation }: RootTabScreenProps<"Main">) => ({
           title: "トップページ",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          // headerRight: () => (
-          //   <Pressable
-          //     onPress={() => navigation.navigate("Modal")}
-          //     style={({ pressed }) => ({
-          //       opacity: pressed ? 0.5 : 1,
-          //     })}
-          //   >
-          //     <FontAwesome
-          //       name="info-circle"
-          //       size={25}
-          //       color={Colors[colorScheme].text}
-          //       style={{ marginRight: 15 }}
-          //     />
-          //   </Pressable>
-          // ),
+          headerStyle: {
+            backgroundColor: "#2A2B37",
+          },
+          headerTintColor: "#E2C792",
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
         })}
       />
       <BottomTab.Screen
@@ -133,7 +141,11 @@ function BottomTabNavigator() {
         component={SendInfo}
         options={{
           title: "データの送信",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          headerStyle: {
+            backgroundColor: "#2A2B37",
+          },
+          headerTintColor: "#E2C792",
+          tabBarIcon: ({ color }) => <TabBarIcon name="upload" color={color} />,
         }}
       />
       <BottomTab.Screen
@@ -141,7 +153,11 @@ function BottomTabNavigator() {
         component={WaitingCompany}
         options={{
           title: "企業一覧",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          headerStyle: {
+            backgroundColor: "#2A2B37",
+          },
+          headerTintColor: "#E2C792",
+          tabBarIcon: ({ color }) => <TabBarIcon name="list" color={color} />,
         }}
       />
       <BottomTab.Screen
@@ -149,7 +165,11 @@ function BottomTabNavigator() {
         component={Coupon}
         options={{
           title: "クーポン",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          headerStyle: {
+            backgroundColor: "#2A2B37",
+          },
+          headerTintColor: "#E2C792",
+          tabBarIcon: ({ color }) => <TabBarIcon name="gift" color={color} />,
         }}
       />
       <BottomTab.Screen
@@ -157,7 +177,11 @@ function BottomTabNavigator() {
         component={Profile}
         options={{
           title: "プロフィール",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          headerStyle: {
+            backgroundColor: "#2A2B37",
+          },
+          headerTintColor: "#E2C792",
+          tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
         }}
       />
     </BottomTab.Navigator>
@@ -171,5 +195,11 @@ function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>["name"];
   color: string;
 }) {
-  return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
+  return (
+    <FontAwesome
+      size={30}
+      style={{ marginBottom: -3, color: "#E2C792" }}
+      {...props}
+    />
+  );
 }
