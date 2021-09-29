@@ -3,9 +3,9 @@ import * as React from "react";
 import { StyleSheet, Image, Platform } from "react-native";
 import { Text, View } from "../components/Themed";
 import * as ImagePicker from "expo-image-picker";
+import * as Permissions from "expo-permissions";
 import { Button } from "react-native-material-ui";
 import { Appearance, useColorScheme } from "react-native-appearance";
-import { Camera } from "expo-camera";
 Appearance.getColorScheme();
 
 interface imageType {
@@ -13,39 +13,43 @@ interface imageType {
 }
 
 export default function SendIdCard() {
-  const [image, setImage] = React.useState<imageType | null>(null);
-  const colorScheme = useColorScheme();
+  const [image, setImage] = React.useState<string>("");
 
   React.useEffect(() => {
     (async () => {
       if (Platform.OS !== "web") {
-        const { status } = await Camera.requestPermissionsAsync();
+        const {
+          status,
+        } = await ImagePicker.requestMediaLibraryPermissionsAsync();
         if (status !== "granted") {
-          alert("カメラの使用許可がありません");
+          alert("アルバムへのアクセス許可がありません");
         }
       }
     })();
   }, []);
 
-  const takePhoto = async () => {
-    let result = await ImagePicker.launchCameraAsync({
-      allowsEditing: false,
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
     });
 
     if (!result.cancelled) {
-      setImage({ image: result.uri });
+      setImage(result.uri);
     }
   };
 
   return (
     <View style={styles.container}>
-      <Button text="送信する画像を撮影" onPress={takePhoto} />
-      {image && (
+      <View style={{ marginBottom: 40 }}>
+        <Text>モザイク処理を施した身分証を提出してください</Text>
+      </View>
+      <Button text="送信する画像を選択" onPress={pickImage} />
+      {image !== "" && (
         <>
-          <Image
-            source={{ uri: image.image }}
-            style={{ width: 300, height: 300 }}
-          />
+          <Image source={{ uri: image }} style={{ width: 300, height: 300 }} />
           <Button
             text="送信する"
             onPress={() => {
@@ -54,6 +58,25 @@ export default function SendIdCard() {
           />
         </>
       )}
+      <View style={{ marginTop: 30 }}>
+        <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+          ご提出可能な身分証
+        </Text>
+      </View>
+      <View style={{ marginTop: 20 }}>
+        <View style={{ marginVertical: 5 }}>
+          <Text style={{ fontSize: 20 }}>・免許証</Text>
+        </View>
+        <View style={{ marginVertical: 5 }}>
+          <Text style={{ fontSize: 20 }}>・保険証</Text>
+        </View>
+        <View style={{ marginVertical: 5 }}>
+          <Text style={{ fontSize: 20 }}>・学生証</Text>
+        </View>
+        <View style={{ marginVertical: 5 }}>
+          <Text style={{ fontSize: 20 }}>・社員証</Text>
+        </View>
+      </View>
     </View>
   );
 }
