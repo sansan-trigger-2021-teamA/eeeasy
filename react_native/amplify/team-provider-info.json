@@ -14,6 +14,12 @@
     "categories": {
       "auth": {
         "eeeasy7fa50027": {}
+      },
+      "function": {
+        "pushNotification": {
+          "deploymentBucketName": "amplify-eeeasy-dev-194421-deployment",
+          "s3Key": "amplify-builds/pushNotification-61444f30534c6f667356-build.zip"
+        }
       }
     }
   }

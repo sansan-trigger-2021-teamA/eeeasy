@@ -46,12 +46,38 @@
         "OAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"exp://127.0.0.1:19000/--/\"],\"LogoutURLs\":[\"exp://127.0.0.1:19000/--/\"]}",
         "UserPoolName": "eeeasy7fa50027_userpool_7fa50027"
       },
-      "lastPushTimeStamp": "2021-09-25T15:02:09.271Z",
+      "lastPushTimeStamp": "2021-09-29T05:41:57.289Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-eeeasy-dev-194421-deployment/amplify-cfn-templates/auth/eeeasy7fa50027-cloudformation-template.yml",
         "logicalId": "autheeeasy7fa50027"
+      }
+    }
+  },
+  "function": {
+    "pushNotification": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "lastBuildTimeStamp": "2021-09-29T05:39:54.244Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2021-09-29T05:39:54.525Z",
+      "distZipFilename": "pushNotification-61444f30534c6f667356-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-eeeasy-dev-194421-deployment",
+        "s3Key": "amplify-builds/pushNotification-61444f30534c6f667356-build.zip"
       },
-      "lastPushDirHash": "qElUQJbl2e0MhtVyhihgPOB83GI="
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-eeeasy-dev-194421-deployment/amplify-cfn-templates/function/pushNotification-cloudformation-template.json",
+        "logicalId": "functionpushNotification"
+      },
+      "lastPushTimeStamp": "2021-09-29T05:41:57.299Z",
+      "output": {
+        "Region": "ap-northeast-1",
+        "Arn": "arn:aws:lambda:ap-northeast-1:955626639300:function:pushNotification-dev",
+        "Name": "pushNotification-dev",
+        "LambdaExecutionRole": "amplifyLambdaRole2100e404-dev"
+      },
+      "lastPushDirHash": "DifKtnhI9RCgtgivGSmaL5zlGe8="
     }
   }
 }

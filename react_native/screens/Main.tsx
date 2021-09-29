@@ -5,12 +5,60 @@ import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 import * as Location from "expo-location";
-import { useEffect } from 'react';
-
-
+import { useEffect, useRef,useState } from 'react';
+import * as Notifications from 'expo-notifications';
+import Constants from 'expo-constants';
+import { Subscription } from '@unimodules/core';
 
 export default function Main({ navigation }: RootTabScreenProps<'Main'>) {
+  const notificationListener = useRef<Subscription>();
+  const responseListener = useRef<Subscription>();
+  const [expoPushToken, setExpoPushToken] = useState('');
+  const [notification, setNotification] = useState<Notifications.Notification>();
+  useEffect(() => {
+    // 通知を受信した時の振る舞いを設定
+    let registerForPushNotificationsAsync = async () => {
+      if (Constants.isDevice) {
+        const { status: existingStatus } = await Notifications.getPermissionsAsync()
+        let finalStatus = existingStatus
+        if (existingStatus !== 'granted') {
+          // 通知の権限がない場合は、再度通知の権限を確認します
+          const { status } = await Notifications.requestPermissionsAsync()
+          finalStatus = status;
+        }
+        if (finalStatus !== 'granted') {
+          alert('Failed to get push token for push notification!')
+        } else {
+          // Pushトークンの取得 
+          const token = (await Notifications.getExpoPushTokenAsync()).data;
+          console.log(token);
+          return token;
+        }
+      }
+      
+    };
+    registerForPushNotificationsAsync().then(token => token && setExpoPushToken(token))
 
+    // アプリがフォアグラウンドの状態で通知を受信したときに起動
+    notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
+      setNotification(notification)
+    })
+
+    // ユーザーが通知をタップまたは操作したときに発生します
+    // （アプリがフォアグラウンド、バックグラウンド、またはキルされたときに動作します）
+    responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+      alert('ユーザーが通知をタップしました')
+      console.log(response)
+    })
+
+    // アンマウント時にリスナーを削除
+    return () => {
+      const notification = notificationListener.current
+      notification && Notifications.removeNotificationSubscription(notification)
+      const response = responseListener.current
+      response && Notifications.removeNotificationSubscription(response)
+    }
+  }, []);
   
   const userName = () => {
     return "sansan"

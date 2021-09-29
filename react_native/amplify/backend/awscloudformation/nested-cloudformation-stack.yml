@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "Root Stack for AWS Amplify CLI",
+  "Description": "Root Stack for AWS Amplify Console",
   "Parameters": {
     "DeploymentBucketName": {
       "Description": "Name of the common deployment bucket provided by the parent stack",
@@ -122,6 +122,17 @@
           "usernameCaseSensitive": false,
           "dependsOn": "",
           "hostedUIProviderCreds": "[]",
+          "env": "dev"
+        }
+      }
+    },
+    "functionpushNotification": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-eeeasy-dev-194421-deployment/amplify-cfn-templates/function/pushNotification-cloudformation-template.json",
+        "Parameters": {
+          "deploymentBucketName": "amplify-eeeasy-dev-194421-deployment",
+          "s3Key": "amplify-builds/pushNotification-61444f30534c6f667356-build.zip",
           "env": "dev"
         }
       }
