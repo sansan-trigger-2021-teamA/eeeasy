@@ -47,12 +47,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "pushNotification",
+            "nodeAPI",
             {
               "Fn::Join": [
                 "",
                 [
-                  "pushNotification",
+                  "nodeAPI",
                   "-",
                   {
                     "Ref": "env"
@@ -89,12 +89,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "amplifyLambdaRole2100e404",
+            "amplifyLambdaRolec51e3a21",
             {
               "Fn::Join": [
                 "",
                 [
-                  "amplifyLambdaRole2100e404",
+                  "amplifyLambdaRolec51e3a21",
                   "-",
                   {
                     "Ref": "env"

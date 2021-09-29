@@ -16,9 +16,9 @@
         "eeeasy7fa50027": {}
       },
       "function": {
-        "pushNotification": {
+        "nodeAPI": {
           "deploymentBucketName": "amplify-eeeasy-dev-194421-deployment",
-          "s3Key": "amplify-builds/pushNotification-61444f30534c6f667356-build.zip"
+          "s3Key": "amplify-builds/nodeAPI-4933362f64554648386a-build.zip"
         }
       }
     }

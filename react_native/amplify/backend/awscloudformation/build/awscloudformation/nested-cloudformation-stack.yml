@@ -83,7 +83,7 @@
         "TemplateURL": "https://s3.amazonaws.com/amplify-eeeasy-dev-194421-deployment/amplify-cfn-templates/auth/eeeasy7fa50027-cloudformation-template.yml",
         "Parameters": {
           "identityPoolName": "eeeasy7fa50027_identitypool_7fa50027",
-          "allowUnauthenticatedIdentities": false,
+          "allowUnauthenticatedIdentities": true,
           "resourceNameTruncated": "eeeasy7fa50027",
           "userPoolName": "eeeasy7fa50027_userpool_7fa50027",
           "autoVerifiedAttributes": "email",
@@ -135,13 +135,34 @@
         }
       }
     },
-    "functionpushNotification": {
+    "functionnodeAPI": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-eeeasy-dev-194421-deployment/amplify-cfn-templates/function/pushNotification-cloudformation-template.json",
+        "TemplateURL": "https://s3.amazonaws.com/amplify-eeeasy-dev-194421-deployment/amplify-cfn-templates/function/nodeAPI-cloudformation-template.json",
         "Parameters": {
           "deploymentBucketName": "amplify-eeeasy-dev-194421-deployment",
-          "s3Key": "amplify-builds/pushNotification-61444f30534c6f667356-build.zip",
+          "s3Key": "amplify-builds/nodeAPI-4933362f64554648386a-build.zip",
+          "env": "dev"
+        }
+      }
+    },
+    "apinodeAPI": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-eeeasy-dev-194421-deployment/amplify-cfn-templates/api/nodeAPI-cloudformation-template.json",
+        "Parameters": {
+          "functionnodeAPIName": {
+            "Fn::GetAtt": [
+              "functionnodeAPI",
+              "Outputs.Name"
+            ]
+          },
+          "functionnodeAPIArn": {
+            "Fn::GetAtt": [
+              "functionnodeAPI",
+              "Outputs.Arn"
+            ]
+          },
           "env": "dev"
         }
       }

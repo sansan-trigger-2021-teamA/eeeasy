@@ -6,6 +6,7 @@ import os
 import pymysql
 import chalicelib.s3 as s3
 import chalicelib.aurora as aurora
+import json
 
 app = Chalice(app_name='eeeasy')
 app.debug = True
@@ -50,3 +51,48 @@ def create_user():
     responce = aurora.create_user(data)
     return {"status":responce}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@app.route('/send-push', methods=['POST'], content_types=['application/json'],cors=True)
+def send_push():
+    data = app.current_request.json_body
+    payload = json.dumps(data)
+    try:
+        response = boto3.client('lambda').invoke(
+            FunctionName='arn:aws:lambda:ap-northeast-1:955626639300:function:pushNotification',
+            InvocationType='RequestResponse', # Event or RequestResponse
+            Payload=payload
+        )
+        return {"statusCode":200,"message":"success"}
+    except Exception as e:
+        print(e)
+        return {"statusCode":400,"message":"error"}

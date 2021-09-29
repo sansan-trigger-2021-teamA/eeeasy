@@ -68,8 +68,6 @@ Parameters:
     Type: CommaDelimitedList
   hostedUIProviderMeta:
     Type: String
-  hostedUIProviderCreds:
-    Type: String
   oAuthMetadata:
     Type: String
   userPoolGroupList:
@@ -80,6 +78,8 @@ Parameters:
     Type: String
   dependsOn:
     Type: CommaDelimitedList
+  hostedUIProviderCreds:
+    Type: String
 Conditions:
   ShouldNotCreateEnvResources:
     Fn::Equals:

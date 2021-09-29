@@ -1,6 +1,6 @@
 {
     "identityPoolName": "eeeasy7fa50027_identitypool_7fa50027",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "eeeasy7fa50027",
     "userPoolName": "eeeasy7fa50027_userpool_7fa50027",
     "autoVerifiedAttributes": [
