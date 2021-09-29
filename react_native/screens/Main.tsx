@@ -10,9 +10,29 @@ import { useEffect } from "react";
 export default function Main({ navigation }: RootTabScreenProps<"Main">) {
   const context = React.useContext(UserContext);
 
-  // React.useEffect(() => {
-  //   navigation.navigate("Modal");
-  // }, []);
+
+  React.useEffect(() => {
+    navigation.navigate("Modal");
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        console.log('Permission to access location was denied');
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      console.log(location);
+    })();
+  }, []);
+
+  const userName = () => {
+    return "sansan"
+  }
+  const name = "sansan"
+
 
   return (
     <SafeAreaView style={styles.container}>
