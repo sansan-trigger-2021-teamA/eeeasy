@@ -38,20 +38,22 @@ def execute_query(query):
 
 def create_user(profile):
     """
-    '{"name":"test1","gender":"女",email:"test@mail","age":"22","job":"会社員"}'
     """
+        '{"name":"test1","gender":"女","email":"test@mail","age":"22","job":"会社員","sub":"test"}'
+
     name = profile["name"]
     gender = profile["gender"]
     age = int(profile["age"])
     job = profile["job"]
     email = profile["email"]
-    query = "INSERT INTO Users(Name, Email, Gender, Age, Job) VALUES(%s, %s, %s,%s, %s)"
+    sub = profile["sub"]
+    query = "INSERT INTO Users(Name, Email, Gender, Age, Job, Sub) VALUES(%s, %s, %s,%s, %s, %s)"
     conn = connect_RDS()
     message = ""
     if conn == type(str):
       return "error"
     with conn.cursor() as cur:
-        cur.execute(query,(name,email,gender,age,job))
+        cur.execute(query,(name,email,gender,age,job,sub))
         conn.commit()
         status = 200
         message = "success"
