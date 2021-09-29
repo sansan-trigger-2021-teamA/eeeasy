@@ -56,31 +56,19 @@ def get_gps():
             }
 
 def set_image(data):
-    
-    FILE_NAME = str(uuid.uuid4())
-    
-    client = boto3.client('sts')
-
-    # AssumeRoleで一時的なCredential情報を発行
-    response = client.assume_role(RoleArn=IAM_ROLE_ARN,
-                                  RoleSessionName=FILE_NAME,
-                                  DurationSeconds=DURATION_SECONDS)
-
-    print(response)
-    
-    session = Session(aws_access_key_id=response['Credentials']['AccessKeyId'],
-                      aws_secret_access_key=response['Credentials']['SecretAccessKey'],
-                      aws_session_token=response['Credentials']['SessionToken'],
-                      region_name=REGION_NAME)
-
-    s3 = session.client('s3', config=Config(signature_version='s3v4'))
-    
-    url = s3.generate_presigned_url(ClientMethod = 'put_object', 
-                                    Params = {'Bucket' : S3_BUCKET_NAME, 'Key' : FILE_NAME}, 
-                                    ExpiresIn = DURATION_SECONDS, 
-                                    HttpMethod = 'PUT')
-
-    print(url)
+    email = data["email"]
+    dt_now = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9)))
+    date = str(dt_now.date())
+    time = str(dt_now.time())
+    FILE_NAME = "image/"+date+"/"+email+time#subID
+    url = env.s3_client.generate_presigned_url(
+        ClientMethod='put_object',
+        Params={
+            'Bucket': S3_BUCKET_NAME, 
+            'Key': FILE_NAME
+        },
+        ExpiresIn=100,
+        HttpMethod='PUT')
 
     return {
        'statusCode': 200,

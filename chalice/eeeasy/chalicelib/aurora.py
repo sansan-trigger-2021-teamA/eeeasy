@@ -75,6 +75,20 @@ def edit_profile(profile):
     responce = {"statusCode":status,"message":message}
     return responce
 
+def set_pushtoken(profile):
+    email = profile["email"]
+    pushtoken = profile["pushtoken"]	
+    query = f"UPDATE Users SET PushToken = %s WHERE Email = %s"
+    conn = connect_RDS()
+    with conn.cursor() as cur:
+        cur.execute(query,(pushtoken,email))
+        conn.commit()
+        status = 200
+        message = "success"
+    conn.close()
+    responce = {"statusCode":status,"message":message}
+    return responce
+
 def select_user(profile):
     email = profile["email"]
     query = f"SELECT * Users WHERE Email = %s"

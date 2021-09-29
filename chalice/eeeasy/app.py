@@ -110,6 +110,13 @@ def edit_profile():
     responce = aurora.edit_profile(data)
     return responce
 
+@app.route('/set-image', methods=['POST'], content_types=['application/json'],cors=True)
+def set_image():
+    data = app.current_request.json_body
+    responce = aurora.set_pushtoken(data)
+    responce = s3.set_image(data)
+    return responce
+
 
 @app.route('/send-push', methods=['POST'], content_types=['application/json'],cors=True)
 def send_push():
