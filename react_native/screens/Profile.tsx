@@ -5,19 +5,11 @@ import { Text, View } from "../components/Themed";
 import Dialog from "react-native-dialog";
 import DropDownPicker from "react-native-dropdown-picker";
 import { Appearance, useColorScheme } from "react-native-appearance";
-import { Avatar } from "react-native-material-ui";
+import { Avatar } from "react-native-paper";
 import { UserContext } from "../context/UserContext";
 import Constants from "expo-constants";
 
 Appearance.getColorScheme();
-
-// ダミーデータ
-const profile = {
-  name: "茂野　吾郎",
-  sex: "男",
-  age: "21",
-  job: "学生",
-};
 
 //職業
 export default function Profile() {
@@ -25,7 +17,6 @@ export default function Profile() {
   const [visible, setVisible] = React.useState(false);
   const [job, setJob] = React.useState(context.user?.job);
   const [openJobSelect, setOpenJobSelect] = React.useState(false);
-  const colorScheme = useColorScheme();
   const [age, setAge] = React.useState<number>(0);
 
   React.useEffect(() => {
@@ -34,7 +25,7 @@ export default function Profile() {
 
   const calcAge = () => {
     const birthDay = new Date(context.user?.birthday);
-    console.log(birthDay)
+    console.log(birthDay);
     if (birthDay) {
       const today = new Date();
       const thisYearBirthday = new Date(
@@ -62,11 +53,9 @@ export default function Profile() {
 
   return (
     <View style={styles.container}>
-      <Avatar
-        iconSize={150}
-        size={150}
-        text={context.user.userName}
-        iconColor="red"
+      <Avatar.Image
+        source={require("../assets/images/simpleLogo.png")}
+        size={180}
       />
       <View lightColor="white" style={{ marginTop: 20 }}>
         <Text style={styles.infoText}>名前 : {context.user?.userName}</Text>

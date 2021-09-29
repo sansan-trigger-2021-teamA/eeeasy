@@ -4,7 +4,7 @@
     "slug": "eeeasy",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/simpleLogo.png",
     "scheme": "myapp",
     "privacy": "public",
     "userInterfaceStyle": "automatic",
@@ -16,28 +16,24 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "jp.teamA.app",
       "infoPlist": {
         "UIUserInterfaceStyle": "light",
-        "UIBackgroundModes": [
-          "location",
-          "fetch"
-        ]
+        "UIBackgroundModes": ["location", "fetch"]
       }
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/simpleLogo.png",
+        "backgroundImage": "./assets/images/simpleLogo.png",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/simpleLogo.png"
     },
     "description": ""
   }
