@@ -12,7 +12,23 @@ export default function Main({ navigation }: RootTabScreenProps<"Main">) {
     navigation.navigate("Modal");
   }, []);
 
-  const name = "sansan";
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        console.log('Permission to access location was denied');
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      console.log(location);
+    })();
+  }, []);
+
+  const userName = () => {
+    return "sansan"
+  }
+  const name = "sansan"
 
   return (
     <SafeAreaView style={styles.container}>
