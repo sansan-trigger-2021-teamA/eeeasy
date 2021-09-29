@@ -1,4 +1,4 @@
-import { StatusBar } from "expo-status-bar";
+// import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import useCachedResources from "./hooks/useCachedResources";
@@ -13,6 +13,7 @@ import { UserContext, User, AuthProvider } from "./context/UserContext";
 import * as BackgroundFetch from "expo-background-fetch";
 import * as TaskManager from "expo-task-manager";
 import * as Location from "expo-location";
+import { StatusBar } from "react-native";
 
 Amplify.configure({
   ...awsmobile,
@@ -49,6 +50,7 @@ function App() {
     return (
       <AuthProvider>
         <SafeAreaProvider>
+          <StatusBar barStyle="light-content" />
           <Navigation colorScheme={colorScheme} />
           <StatusBar />
         </SafeAreaProvider>
