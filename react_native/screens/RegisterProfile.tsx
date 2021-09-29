@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
   usernameInput: {
     height: 40,
     borderWidth: 1,
-    paddingHorizontal: 30,
+    paddingHorizontal: 15,
     opacity: 0.8,
   },
 });
