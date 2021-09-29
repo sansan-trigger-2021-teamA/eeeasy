@@ -16,7 +16,7 @@
     "@aws-amplify/cli": "^6.0.1",
     "@aws-amplify/core": "^4.3.0",
     "@expo/vector-icons": "^12.0.0",
-    "@react-native-async-storage/async-storage": "^1.15.8",
+    "@react-native-async-storage/async-storage": "~1.15.0",
     "@react-native-community/geolocation": "^2.0.2",
     "@react-native-community/netinfo": "^6.0.2",
     "@react-navigation/bottom-tabs": "^6.0.5",
@@ -25,6 +25,7 @@
     "@types/react-native-material-ui": "^1.32.3",
     "aws-amplify": "^4.3.0",
     "aws-amplify-react-native": "^5.0.3",
+    "axios": "^0.21.4",
     "expo": "42.0.0",
     "expo-asset": "~8.3.2",
     "expo-background-fetch": "^9.2.2",
@@ -37,6 +38,7 @@
     "expo-notifications": "^0.12.3",
     "expo-permissions": "~12.1.1",
     "expo-splash-screen": "~0.11.2",
+    "expo-sqlite": "~9.2.1",
     "expo-status-bar": "~1.0.4",
     "expo-task-manager": "~9.2.2",
     "expo-web-browser": "~9.2.0",
@@ -55,6 +57,7 @@
     "react-native-reanimated": "~2.2.0",
     "react-native-safe-area-context": "3.2.0",
     "react-native-screens": "~3.4.0",
+    "react-native-storage": "^1.0.1",
     "react-native-web": "~0.13.12"
   },
   "devDependencies": {

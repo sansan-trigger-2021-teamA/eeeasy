@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { StyleSheet, ScrollView,SafeAreaView,Button } from 'react-native';
+import * as React from "react";
+import { StyleSheet, ScrollView, SafeAreaView, Button } from "react-native";
 
-import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
-import { RootTabScreenProps } from '../types';
+import EditScreenInfo from "../components/EditScreenInfo";
+import { Text, View } from "../components/Themed";
+import { RootTabScreenProps } from "../types";
 import * as Location from "expo-location";
 import { useEffect, useRef,useState } from 'react';
 import * as Notifications from 'expo-notifications';
@@ -60,6 +60,26 @@ export default function Main({ navigation }: RootTabScreenProps<'Main'>) {
     }
   }, []);
   
+import { useEffect } from "react";
+
+export default function Main({ navigation }: RootTabScreenProps<"Main">) {
+  React.useEffect(() => {
+    navigation.navigate("Modal");
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        console.log('Permission to access location was denied');
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      console.log(location);
+    })();
+  }, []);
+
   const userName = () => {
     return "sansan"
   }
@@ -69,66 +89,73 @@ export default function Main({ navigation }: RootTabScreenProps<'Main'>) {
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
         <Text style={styles.hello}>こんにちは{name}</Text>
-        <View style={styles.notify} lightColor="#eee" darkColor="rgba(255,255,255,0.1)">
+        <View
+          style={styles.notify}
+          lightColor="#eee"
+          darkColor="rgba(255,255,255,0.1)"
+        >
           <Text>ここに通知が来るンゴ</Text>
         </View>
-        <View style={styles.notify} lightColor="#eee" darkColor="rgba(255,255,255,0.1)">
+        <View
+          style={styles.notify}
+          lightColor="#eee"
+          darkColor="rgba(255,255,255,0.1)"
+        >
           <Text>テスト</Text>
         </View>
       </ScrollView>
-      <View　style={{ flexDirection: 'row',marginBottom:20,}}>
-        <Button 
+      <View style={{ flexDirection: "row", marginBottom: 20 }}>
+        <Button
           title="Press me"
-          onPress={() => alert('Simple Button pressed')}
+          onPress={() => alert("Simple Button pressed")}
         />
-        <Button 
+        <Button
           title="Press me2"
-          onPress={() => alert('Simple Button pressed')}
+          onPress={() => alert("Simple Button pressed")}
         />
       </View>
-    </SafeAreaView> 
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   title: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   separator: {
     marginVertical: 30,
     height: 1,
-    width: '80%',
+    width: "80%",
   },
-  hello:{
-    fontSize:10,
+  hello: {
+    fontSize: 10,
   },
   scrollView: {
-    width: '100%',
-    textAlign: 'center',
+    width: "100%",
+    textAlign: "center",
     marginHorizontal: 20,
   },
-  notify:{
-  height: 188,
-  top: 50,
-  marginTop:20,
-  width: '80%',
-  left:"10%",
-  textAlign: 'center',
-  borderRadius: 22,
-  borderStyle:"solid",
-  borderWidth:1
+  notify: {
+    height: 188,
+    top: 50,
+    marginTop: 20,
+    width: "80%",
+    left: "10%",
+    textAlign: "center",
+    borderRadius: 22,
+    borderStyle: "solid",
+    borderWidth: 1,
   },
-  graph:{
-    width: '80%',
-    height: '40%',
-    borderStyle:"solid",
-    borderWidth:1
-  }
+  graph: {
+    width: "80%",
+    height: "40%",
+    borderStyle: "solid",
+    borderWidth: 1,
+  },
 });
-

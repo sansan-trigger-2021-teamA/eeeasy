@@ -8,14 +8,36 @@ import { Button } from "react-native-material-ui";
 
 import { RadioButton } from "react-native-paper";
 import { shouldUseActivityState } from "react-native-screens";
+import { UserContext } from "../context/UserContext";
+import { useNavigation } from "@react-navigation/native";
+import { User } from "../context/UserContext";
 
-export default function RegisterProfile({
-  navigation,
-}: RootTabScreenProps<"RegisterProfile">) {
+export default function RegisterProfile() {
   const [openJobSelect, setOpenJobSelect] = React.useState(false);
   const [userName, setUserName] = React.useState<string>("");
-  const [sex, setSex] = React.useState<string | null>(null);
-  const [job, setJob] = React.useState(null);
+  const [sex, setSex] = React.useState<string>("");
+  const [job, setJob] = React.useState<string>("");
+  const context = React.useContext(UserContext);
+  const navigation = useNavigation();
+  const [year, setYear] = React.useState<string>("");
+  const [month, setMonth] = React.useState<string>("");
+  const [day, setDay] = React.useState<string>("");
+
+  const handleSubmit = () => {
+    const numberMonth = Number(month);
+    const lessMonth = numberMonth - 1;
+    const birthday = new Date(year + "/" + lessMonth.toString() + "/" + day);
+    const profile: User = {
+      id: "適当",
+      userName: userName,
+      birthday: birthday,
+      sex: sex,
+      job: job,
+    };
+    context.setUser(profile);
+    navigation.navigate("Root");
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.Box}>
@@ -29,26 +51,41 @@ export default function RegisterProfile({
         </View>
         <Text>生年月日</Text>
         <View style={styles.rowBox}>
-          <TextInput style={styles.input} />
+          <TextInput style={styles.input} onChangeText={setYear} />
           <Text>年</Text>
-          <TextInput style={styles.input} />
+          <TextInput style={styles.input} onChangeText={setMonth} />
           <Text>月</Text>
-          <TextInput style={styles.input} />
+          <TextInput style={styles.input} onChangeText={setDay} />
           <Text>日</Text>
         </View>
         <Text>性別</Text>
         <View style={styles.rowBox}>
           <Text>男性</Text>
           <View style={styles.RadioButton}>
-            <RadioButton value="男性" color="blue" status="checked" />
+            <RadioButton
+              value="男性"
+              color="blue"
+              status={sex === "男性" ? "checked" : "unchecked"}
+              onPress={() => setSex("男性")}
+            />
           </View>
           <Text>女性</Text>
           <View style={styles.RadioButton}>
-            <RadioButton value="女性" color="blue" />
+            <RadioButton
+              value="女性"
+              color="blue"
+              status={sex === "女性" ? "checked" : "unchecked"}
+              onPress={() => setSex("女性")}
+            />
           </View>
           <Text>その他</Text>
           <View style={styles.RadioButton}>
-            <RadioButton value="その他" color="blue" />
+            <RadioButton
+              value="その他"
+              color="blue"
+              status={sex === "その他" ? "checked" : "unchecked"}
+              onPress={() => setSex("その他")}
+            />
           </View>
         </View>
         <Text>職業</Text>
@@ -75,7 +112,7 @@ export default function RegisterProfile({
             }}
           />
           <View style={styles.Button}>
-            <Button text="次へ" />
+            <Button text="登録" onPress={handleSubmit} />
           </View>
         </View>
       </View>
@@ -118,7 +155,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderWidth: 1,
     paddingHorizontal: 30,
-    opacity: 0.5,
+    opacity: 0.8,
   },
   selectBox: {
     marginVertical: 20,
@@ -133,7 +170,7 @@ const styles = StyleSheet.create({
   usernameInput: {
     height: 40,
     borderWidth: 1,
-    paddingHorizontal: 30,
+    paddingHorizontal: 15,
     opacity: 0.8,
   },
 });
