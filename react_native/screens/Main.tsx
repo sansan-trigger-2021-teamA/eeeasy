@@ -8,9 +8,12 @@ import { UserContext } from "../context/UserContext";
 import { Button } from "react-native-material-ui";
 import * as Location from "expo-location";
 import { useEffect } from "react";
+import { RewardGraph } from "../components/RewardGraph";
+import { DistanceGraph } from "../components/DistanceGraph";
 
 export default function Main({ navigation }: RootTabScreenProps<"Main">) {
   const context = React.useContext(UserContext);
+  const [graph, setGraph] = React.useState(false);
 
   React.useEffect(() => {
     AsyncStorage.getItem("User").then((user) => {
@@ -25,8 +28,8 @@ export default function Main({ navigation }: RootTabScreenProps<"Main">) {
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
-        console.log('Permission to access location was denied');
+      if (status !== "granted") {
+        console.log("Permission to access location was denied");
         return;
       }
 
@@ -35,17 +38,11 @@ export default function Main({ navigation }: RootTabScreenProps<"Main">) {
     })();
   }, []);
 
-  const userName = () => {
-    return "sansan"
-  }
-  const name = "sansan"
-
-
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView}>
+      <View style={styles.scrollView}>
         <View lightColor="white" style={styles.hello}>
-          <Text style={styles.hello}>
+          <Text style={styles.helloText}>
             こんにちは {context.user.userName} さん
           </Text>
         </View>
@@ -57,19 +54,19 @@ export default function Main({ navigation }: RootTabScreenProps<"Main">) {
           <Text>ここに通知が来るンゴ</Text>
         </View>
         <View
-          style={styles.distance}
-          lightColor="#f5f5f5"
+          style={styles.graphArea}
+          lightColor="white"
           darkColor="rgba(255,255,255,0.1)"
         >
-          <Text>テスト</Text>
+          <View style={{ marginVertical: 20 }}>
+            <Text style={{ fontSize: 20 }}>{graph ? "移動距離" : "報酬"}</Text>
+          </View>
+          {graph ? <DistanceGraph /> : <RewardGraph />}
         </View>
-      </ScrollView>
-      <View style={{ flexDirection: "row", marginBottom: 20 }}>
-        <Button text="報酬" onPress={() => alert("Simple Button pressed")} />
-        <Button
-          text="移動距離"
-          onPress={() => alert("Simple Button pressed")}
-        />
+      </View>
+      <View style={{ flexDirection: "row", marginTop: 70, paddingBottom: 190 }}>
+        <Button text="報酬" onPress={() => setGraph(false)} />
+        <Button text="移動距離" onPress={() => setGraph(true)} />
       </View>
     </SafeAreaView>
   );
@@ -77,7 +74,6 @@ export default function Main({ navigation }: RootTabScreenProps<"Main">) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "white",
@@ -86,26 +82,22 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
+  hello: {
+    marginLeft: 20,
+    marginVertical: 40,
     width: "80%",
   },
-  hello: {
+  helloText: {
     fontSize: 20,
     marginLeft: 20,
     marginTop: 20,
-    width: "80%",
   },
   scrollView: {
     width: "100%",
     textAlign: "center",
-    marginHorizontal: 20,
   },
   notify: {
     height: 188,
-    top: 50,
-    // marginTop: 20,
     width: "80%",
     left: "10%",
     textAlign: "center",
@@ -113,21 +105,12 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
     borderWidth: 1,
   },
-  distance: {
+  graphArea: {
     height: 188,
-    top: 50,
-    marginTop: 20,
+    marginTop: 30,
     width: "80%",
     left: "10%",
     textAlign: "center",
-    borderRadius: 22,
-    borderStyle: "solid",
-    borderWidth: 1,
-  },
-  graph: {
-    width: "80%",
-    height: "40%",
-    borderStyle: "solid",
-    borderWidth: 1,
+    alignItems: "center",
   },
 });

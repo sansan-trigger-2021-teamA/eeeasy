@@ -62,12 +62,17 @@ export default function Profile() {
 
   return (
     <View style={styles.container}>
-      <Avatar iconSize={150} size={150} text={context.user.userName} />
+      <Avatar
+        iconSize={150}
+        size={150}
+        text={context.user.userName}
+        iconColor="red"
+      />
       <View lightColor="white" style={{ marginTop: 20 }}>
-        <Text style={styles.infoText}>名前:{context.user?.userName}</Text>
-        <Text style={styles.infoText}>性別:{context.user?.sex}</Text>
-        <Text style={styles.infoText}>年齢:{age}</Text>
-        <Text style={styles.infoText}>職業:{job}</Text>
+        <Text style={styles.infoText}>名前 : {context.user?.userName}</Text>
+        <Text style={styles.infoText}>性別 : {context.user?.sex}</Text>
+        <Text style={styles.infoText}>年齢 : {age}</Text>
+        <Text style={styles.infoText}>職業 : {job}</Text>
       </View>
       <View>
         <Button text="職業を変更" onPress={showDialog} />
