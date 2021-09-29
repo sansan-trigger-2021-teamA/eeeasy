@@ -31,6 +31,7 @@ import {
 import LinkingConfiguration from "./LinkingConfiguration";
 import SendHealthCheckDataScreen from "../screens/SendHealthCheckDataScreen";
 import TermOfServiceModal from "../screens/TermOfServiceModal";
+import SendIdCard from "../screens/SendIdCard";
 
 export default function Navigation({
   colorScheme,
@@ -67,6 +68,11 @@ function RootNavigator() {
         name="SendHealthCheckDataScreen"
         component={SendHealthCheckDataScreen}
         options={{ headerShown: true, title: "健康診断データの送信" }}
+      />
+      <Stack.Screen
+        name="SendIdCard"
+        component={SendIdCard}
+        options={{ headerShown: true, title: "身分証の送信" }}
       />
       <Stack.Screen
         name="NotFound"

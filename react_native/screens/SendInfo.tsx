@@ -12,6 +12,14 @@ export default function SendInfo() {
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
         <Button
+          text="身分証の送信"
+          onPress={() => {
+            navigation.navigate("SendIdCard");
+          }}
+        />
+      </View>
+      <View style={styles.buttonContainer}>
+        <Button
           text="健康診断データの送信"
           onPress={() => {
             navigation.navigate("SendHealthCheckDataScreen");
