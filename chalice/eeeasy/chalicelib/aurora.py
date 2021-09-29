@@ -101,7 +101,20 @@ def select_user(profile):
     conn.close()
     responce = {"statusCode":status,"message":message}
     return responce
-    
+
+def get_pushtoken():
+    query = f"SELECT PushToken FROM Users"
+    conn = connect_RDS()
+    with conn.cursor() as cur:
+        cur.execute(query)
+        rows = cur.fetchall()
+        conn.commit()
+        status = 200
+        message = "success"
+    conn.close()
+    responce = {"statusCode":status,"message":rows}
+    return responce
+
 
 def insert_gps(email,filename):
     query = "INSERT INTO Gps(FileName) VALUES(%s)"

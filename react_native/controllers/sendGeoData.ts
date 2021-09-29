@@ -17,6 +17,7 @@ export const sendGeoData = async(gpsObj: object) => {
                 return 
                }
                 if(JSON.parse(result).items.length > 30){
+                    
                     await getEmail().then(email =>{
                         axios.post("https://shugznedv3.execute-api.ap-northeast-1.amazonaws.com/api/set-gps",{
                             email:email,
