@@ -17,8 +17,9 @@ import * as Location from 'expo-location';
 Amplify.configure({
   ...awsmobile,
   Analytics: {
-  disabled: true,
-},});
+    disabled: true,
+  },
+});
 
 const LOCATION_TASK_NAME = 'background-location-task';
 
@@ -57,13 +58,14 @@ function App() {
 
 export default withAuthenticator(App, {
   signUpConfig: {
-    hiddenDefaults: ['phone_number','email']
-  }});
+    hiddenDefaults: ["phone_number", "email"],
+  },
+});
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
