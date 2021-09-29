@@ -7,7 +7,9 @@ import Navigation from "./navigation";
 import { StyleSheet } from "react-native";
 import Amplify from "@aws-amplify/core";
 import awsmobile from "./src/aws-exports";
+// @ts-ignore
 import { withAuthenticator } from "aws-amplify-react-native";
+import { UserContext, User } from "./context/UserContext";
 
 Amplify.configure({
   ...awsmobile,
@@ -16,20 +18,22 @@ Amplify.configure({
   },
 });
 
-
-
 function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
+
+  const [user, setUser] = React.useState<User>({} as User);
 
   if (!isLoadingComplete) {
     return null;
   } else {
     return (
-      <SafeAreaProvider>
-        <Navigation colorScheme={colorScheme} />
-        <StatusBar />
-      </SafeAreaProvider>
+      <UserContext.Provider value={{ user: user, setUser: setUser }}>
+        <SafeAreaProvider>
+          <Navigation colorScheme={colorScheme} />
+          <StatusBar />
+        </SafeAreaProvider>
+      </UserContext.Provider>
     );
   }
 }
