@@ -117,7 +117,6 @@ def set_image():
     responce = s3.set_image(data)
     return responce
 
-
 @app.route('/send-push', methods=['POST'], content_types=['application/json'],cors=True)
 def send_push():
     data = app.current_request.json_body
