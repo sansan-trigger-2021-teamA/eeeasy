@@ -71,3 +71,22 @@ def edit_profile(profile):
     conn.close()
 
     conn = connect_RDS()
+
+def insert_gps(email,filename):
+    query = "INSERT INTO Gps(FileName) VALUES(%s)"
+    # query = "INSERT INTO Gps(FileName,SubId) VALUES(%s,%s)"
+    conn = connect_RDS()
+
+    if conn == type(str):
+        return "error"
+    with conn.cursor() as cur:
+        cur.execute(query,(filename))
+        # cur.execute(query,(filename,email,))
+        conn.commit()
+        status = 200
+        message = "success"
+    conn.close()
+    responce = {"statusCode":status,"message":message}
+    return responce
+
+    
