@@ -49,7 +49,7 @@ export default function SendHealthCheckDataScreen() {
           <Button
             text="送信する"
             onPress={() => {
-              sendImage(image);
+              alert("送信処理は未実装");
             }}
           />
         </>
