@@ -19,7 +19,14 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "jp.teamA.app"
+      "bundleIdentifier": "jp.teamA.app",
+      "infoPlist": {
+        "UIBackgroundModes": [
+          "location",
+          "fetch"
+        ]
+      }
+
     },
     "android": {
       "adaptiveIcon": {
