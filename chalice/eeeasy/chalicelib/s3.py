@@ -16,7 +16,7 @@ def create_bucket(data):
     return {'save': data['key']}
 
 def set_gps(data):
-    dt_now = datetime.datetime(datatzinfo=9)
+    dt_now = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9)))
     date = str(dt_now.date())
     time = str(dt_now.time())
     key = "gps/"+date+"/"+data["email"]+time+".json"#subID
