@@ -31,7 +31,7 @@ const Company = (listRenderItemInfo: ListRenderItemInfo<Props>) => {
   return (
     <>
       <View style={style.item}>
-        <View style={{ flexDirection: "column", marginRight: 20 }}>
+        <View style={{ flexDirection: "column", marginRight: 30 }}>
           <Text style={style.name}>{listRenderItemInfo.item.name}</Text>
           <Text style={{ paddingTop: 10, fontSize: 13 }}>
             取ろうとしてる情報
