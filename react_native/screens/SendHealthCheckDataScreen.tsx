@@ -6,6 +6,7 @@ import * as ImagePicker from "expo-image-picker";
 import { Button } from "react-native-material-ui";
 import { Appearance, useColorScheme } from "react-native-appearance";
 import { Camera } from "expo-camera";
+import { useNavigation } from "@react-navigation/native";
 Appearance.getColorScheme();
 
 interface imageType {
@@ -14,6 +15,7 @@ interface imageType {
 
 export default function SendHealthCheckDataScreen() {
   const [image, setImage] = React.useState<imageType | null>(null);
+  const navigation = useNavigation();
 
   React.useEffect(() => {
     (async () => {
@@ -48,7 +50,7 @@ export default function SendHealthCheckDataScreen() {
           <Button
             text="送信する"
             onPress={() => {
-              alert("送信処理は未実装");
+              navigation.navigate("Root");
             }}
           />
         </>
