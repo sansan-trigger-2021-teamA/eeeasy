@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     borderRadius: 22,
     borderStyle: "solid",
-    // borderWidth: 1,
+    borderWidth: 1,
     padding: 10,
   },
   graphArea: {
