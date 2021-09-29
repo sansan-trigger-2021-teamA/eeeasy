@@ -38,8 +38,8 @@ def execute_query(query):
 
 def create_user(profile):
     """
+    '{"name":"test1","gender":"女","email":"test@mail","age":"22","job":"会社員","sub":"test"}'
     """
-        '{"name":"test1","gender":"女","email":"test@mail","age":"22","job":"会社員","sub":"test"}'
 
     name = profile["name"]
     gender = profile["gender"]
@@ -68,6 +68,19 @@ def edit_profile(profile):
     conn = connect_RDS()
     with conn.cursor() as cur:
         cur.execute(query,(job,email))
+        conn.commit()
+        status = 200
+        message = "success"
+    conn.close()
+    responce = {"statusCode":status,"message":message}
+    return responce
+
+def select_user(profile):
+    email = profile["email"]
+    query = f"SELECT * Users WHERE Email = %s"
+    conn = connect_RDS()
+    with conn.cursor() as cur:
+        cur.execute(query,(email))
         conn.commit()
         status = 200
         message = "success"

@@ -15,6 +15,7 @@ from exponent_server_sdk import (
     PushTicketError,
 )
 from requests.exceptions import ConnectionError, HTTPError
+import requests
 
 app = Chalice(app_name='eeeasy')
 app.debug = True
@@ -98,6 +99,12 @@ def set_gps():
     return responce
 
 @app.route('/update-job', methods=['POST'], content_types=['application/json'],cors=True)
+def edit_profile():
+    data = app.current_request.json_body
+    responce = aurora.edit_profile(data)
+    return responce
+
+@app.route('/select-user', methods=['POST'], content_types=['application/json'],cors=True)
 def edit_profile():
     data = app.current_request.json_body
     responce = aurora.edit_profile(data)
