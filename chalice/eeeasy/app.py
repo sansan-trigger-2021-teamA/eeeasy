@@ -104,6 +104,17 @@ def edit_profile():
     responce = aurora.edit_profile(data)
     return responce
 
+@app.route('/get-push', methods=['GET'])
+def get_pushtoken():
+    responce = aurora.get_pushtoken()
+    return responce
+
+@app.route('/set-push', methods=['POST'], content_types=['application/json'],cors=True)
+def set_pushtoken():
+    data = app.current_request.json_body
+    responce = aurora.set_pushtoken(data)
+    return responce
+
 @app.route('/select-user', methods=['POST'], content_types=['application/json'],cors=True)
 def edit_profile():
     data = app.current_request.json_body
@@ -120,50 +131,51 @@ def set_image():
 @app.route('/send-push', methods=['POST'], content_types=['application/json'],cors=True)
 def send_push():
     data = app.current_request.json_body
-    token = "ExponentPushToken[im3PhvNozRcUbsAKG6tJIF]"
-    message = "mes"
+    token = "ExponentPushToken[bR87JVCVlvtjwcKRUxFarl]"
+    message = "text"
     extra = "data"
-    headers = {
-        'Accept': 'application/json',
-    }
-    data = '{"to": "ExponentPushToken[im3PhvNozRcUbsAKG6tJIF]","title":"hello","body": "world"}'
-    response = requests.post("https://exp.host/--/api/v2/push/send", headers=headers, data=data)
-    print(response.text)
+    # headers = {
+    #     'Accept': 'application/json',
+    # }
+    # data = '{"to": "ExponentPushToken[im3PhvNozRcUbsAKG6tJIF]","title":"hello","body": "world"}'
+    # response = requests.post("https://exp.host/--/api/v2/push/send", headers=headers, data=data)
+    # print(response.text)
 # Basic arguments. You should extend this function with the push features you
 # want to use, or simply pass in a `PushMessage` object.
-    # try:
-    #     response = PushClient().publish(
-    #         PushMessage(to=token,
-    #                     body=message,
-    #                     data=extra))
-    # except PushServerError as exc:
-    #     # Encountered some likely formatting/validation error.
-    #     rollbar.report_exc_info(
-    #         extra_data={
-    #             'token': token,
-    #             'message': message,
-    #             'extra': extra,
-    #             'errors': exc.errors,
-    #             'response_data': exc.response_data,
-    #         })
-    #     raise
-    # except (ConnectionError, HTTPError) as exc:
-    #     # Encountered some Connection or HTTP error - retry a few times in
-    #     # case it is transient.
-    #     rollbar.report_exc_info(
-    #         extra_data={'token': token, 'message': message, 'extra': extra})
-    #     raise self.retry(exc=exc)
+    try:
+        response = PushClient().publish(
+            PushMessage(to=token,
+                        body=message))
+    except PushServerError as exc:
+        # Encountered some likely formatting/validation error.
+        # rollbar.report_exc_info(
+        #     extra_data={
+        #         'token': token,
+        #         'message': message,
+        #         'extra': extra,
+        #         'errors': exc.errors,
+        #         'response_data': exc.response_data,
+        #     })
+        print("--------------------")
+        print(exc)
+        raise
+    except (ConnectionError, HTTPError) as exc:
+        # Encountered some Connection or HTTP error - retry a few times in
+        # case it is transient.
+        # rollbar.report_exc_info(
+        #     extra_data={'token': token, 'message': message, 'extra': extra})
+        raise self.retry(exc=exc)
 
-    # try:
-    #     # We got a response back, but we don't know whether it's an error yet.
-    #     # This call raises errors so we can handle them with normal exception
-    #     # flows.
-    #     response.validate_response()
-    # except DeviceNotRegisteredError:
-    #     # Mark the push token as inactive
-    #     from notifications.models import PushToken
-    #     PushToken.objects.filter(token=token).update(active=False)
-    # except PushTicketError as exc:
+    try:
+        # We got a response back, but we don't know whether it's an error yet.
+        # This call raises errors so we can handle them with normal exception
+        # flows.
+        response.validate_response()
+    except DeviceNotRegisteredError:
+        # Mark the push token as inactive
+        from notifications.models import PushToken
+        PushToken.objects.filter(token=token).update(active=False)
+    except PushTicketError as exc:
         # Encountered some other per-notification error.
         # rollbar.report_exc_info(
         #     extra_data={
@@ -172,4 +184,4 @@ def send_push():
         #         'extra': extra,
         #         'push_response': exc.push_response._asdict(),
         #     })
-        # raise self.retry(exc=exc)
+        raise self.retry(exc=exc)
