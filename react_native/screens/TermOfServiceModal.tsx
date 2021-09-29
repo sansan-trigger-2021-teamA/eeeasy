@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   },
   checkBox: {
     borderWidth: 1,
-    opacity: 0.3,
+    opacity: 0.8,
     marginLeft: 5,
   },
   scroll: {
