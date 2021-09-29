@@ -5,8 +5,9 @@ import { Text, View } from "../components/Themed";
 import Dialog from "react-native-dialog";
 import DropDownPicker from "react-native-dropdown-picker";
 import { Appearance, useColorScheme } from "react-native-appearance";
-import { color } from "react-native-reanimated";
+import { Avatar } from "react-native-material-ui";
 import { UserContext } from "../context/UserContext";
+import Constants from "expo-constants";
 
 Appearance.getColorScheme();
 
@@ -32,7 +33,8 @@ export default function Profile() {
   }, []);
 
   const calcAge = () => {
-    const birthDay = context.user?.birthday;
+    const birthDay = new Date(context.user?.birthday);
+    console.log(birthDay)
     if (birthDay) {
       const today = new Date();
       const thisYearBirthday = new Date(
@@ -60,20 +62,20 @@ export default function Profile() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.infoText}>name:{context.user?.userName}</Text>
-      <Text style={styles.infoText}>sex:{context.user?.sex}</Text>
-      <Text style={styles.infoText}>age:{age}</Text>
-      <Text style={styles.infoText}>job:{job}</Text>
+      <Avatar
+        iconSize={150}
+        size={150}
+        text={context.user.userName}
+        iconColor="red"
+      />
+      <View lightColor="white" style={{ marginTop: 20 }}>
+        <Text style={styles.infoText}>名前 : {context.user?.userName}</Text>
+        <Text style={styles.infoText}>性別 : {context.user?.sex}</Text>
+        <Text style={styles.infoText}>年齢 : {age}</Text>
+        <Text style={styles.infoText}>職業 : {job}</Text>
+      </View>
       <View>
-        <Button
-          text="職業を変更"
-          onPress={showDialog}
-          style={
-            colorScheme === "dark"
-              ? { ...{ text: styles.buttonWhite } }
-              : { ...{ text: styles.buttonBlack } }
-          }
-        />
+        <Button text="職業を変更" onPress={showDialog} />
       </View>
       <Dialog.Container visible={visible} contentStyle={styles.dialog}>
         <Dialog.Title>職業を変更</Dialog.Title>
@@ -109,15 +111,9 @@ export default function Profile() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: "center",
-    paddingTop: "5%",
-  },
-  buttonWhite: {
-    color: "white",
-  },
-  buttonBlack: {
-    color: "black",
+    paddingTop: Constants.statusBarHeight,
+    paddingBottom: 300,
   },
   infoText: {
     paddingVertical: "5%",

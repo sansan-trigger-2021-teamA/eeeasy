@@ -11,6 +11,10 @@ import { shouldUseActivityState } from "react-native-screens";
 import { UserContext } from "../context/UserContext";
 import { useNavigation } from "@react-navigation/native";
 import { User } from "../context/UserContext";
+import { getUserProfile } from "../controllers/getUserProfile"
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
+
 
 export default function RegisterProfile() {
   const [openJobSelect, setOpenJobSelect] = React.useState(false);
@@ -22,20 +26,43 @@ export default function RegisterProfile() {
   const [year, setYear] = React.useState<string>("");
   const [month, setMonth] = React.useState<string>("");
   const [day, setDay] = React.useState<string>("");
+  //this is 車輪の再発明
+  const calcAge = (birthDay:Date) => {
+      const today = new Date();
+      const thisYearBirthday = new Date(
+        today.getFullYear(),
+        birthDay.getMonth() - 1,
+        birthDay.getDate()
+      );
+      const ageNow = today.getFullYear() - birthDay.getFullYear();
+      return ageNow
+  }
 
   const handleSubmit = () => {
     const numberMonth = Number(month);
     const lessMonth = numberMonth - 1;
     const birthday = new Date(year + "/" + lessMonth.toString() + "/" + day);
-    const profile: User = {
-      id: "適当",
-      userName: userName,
-      birthday: birthday,
-      sex: sex,
-      job: job,
-    };
-    context.setUser(profile);
-    navigation.navigate("Root");
+    getUserProfile().then(async (userProfile) => {
+      const profile: User = {
+        id: userProfile.sub ,
+        userName: userName,
+        birthday: birthday,
+        sex: sex,
+        job: job,
+      };
+      await axios.post("https://shugznedv3.execute-api.ap-northeast-1.amazonaws.com/api/create-user",{
+        name:profile.userName, 
+        email:userProfile.email,
+        gender:profile.sex,
+        age:calcAge(profile.birthday),
+        sub:userProfile.sub, 
+        job:profile.job
+      })
+      await AsyncStorage.setItem("User", JSON.stringify(profile));
+      context.setUser(profile);
+      navigation.navigate("Root");
+      
+    })
   };
 
   return (

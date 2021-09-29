@@ -12,7 +12,7 @@ interface imageType {
   image: string;
 }
 
-export default function SendHealthCheckDataScreen() {
+export default function SendIdCard() {
   const [image, setImage] = React.useState<imageType | null>(null);
   const colorScheme = useColorScheme();
 
