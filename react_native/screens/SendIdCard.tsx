@@ -6,6 +6,7 @@ import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
 import { Button } from "react-native-material-ui";
 import { Appearance, useColorScheme } from "react-native-appearance";
+import { useNavigation } from "@react-navigation/native";
 Appearance.getColorScheme();
 
 interface imageType {
@@ -14,6 +15,7 @@ interface imageType {
 
 export default function SendIdCard() {
   const [image, setImage] = React.useState<string>("");
+  const navigation = useNavigation();
 
   React.useEffect(() => {
     (async () => {
@@ -53,7 +55,7 @@ export default function SendIdCard() {
           <Button
             text="送信する"
             onPress={() => {
-              alert("送信処理は未実装");
+              navigation.navigate("Root");
             }}
           />
         </>
