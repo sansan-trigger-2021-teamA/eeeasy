@@ -100,7 +100,7 @@ app.post('/items', async function(req, res) {
       return [
           // 1つ1つのメッセージは以下の形式で
           {
-                  "to": "ExponentPushToken[im3PhvNozRcUbsAKG6tJIF]", // Expoプッシュトークン
+                  "to": "ExponentPushToken[RvJ8y9AVvTouyLKVoFu6Ra]", // Expoプッシュトークン
                   "sound": 'default',  // 通知時の音を鳴らすかどうかの設定
                   "title": "title",  // 通知タイトル
                   "body": "body"  // 通知本文

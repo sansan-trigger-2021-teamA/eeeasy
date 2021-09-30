@@ -7,6 +7,7 @@ import { Button } from "react-native-material-ui";
 import { Appearance, useColorScheme } from "react-native-appearance";
 import { Camera } from "expo-camera";
 import { useNavigation } from "@react-navigation/native";
+import { sendImage } from '../controllers/sendImage';
 Appearance.getColorScheme();
 
 interface imageType {
